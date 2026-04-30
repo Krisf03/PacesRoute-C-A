@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c6sm8u7sbwjf8"]
+
+[ext_resource type="Script" uid="uid://blpbdiwyh4i8s" path="res://escenes/gui/gui.gd" id="1_5r0dk"]
+[ext_resource type="PackedScene" uid="uid://b36ybuehlvjs6" path="res://escenes/controls/joystick.tscn" id="1_dvm05"]
+
+[node name="Gui" type="CanvasLayer" unique_id=1116073834 node_paths=PackedStringArray("joystick")]
+script = ExtResource("1_5r0dk")
+joystick = NodePath("Joystick")
+
+[node name="Joystick" parent="." unique_id=318191342 instance=ExtResource("1_dvm05")]
+position = Vector2(178, 478)

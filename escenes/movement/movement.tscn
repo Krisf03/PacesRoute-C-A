@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://vj1et4qtk8l4"]
+
+[ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://escenes/gui/gui.tscn" id="1_joalw"]
+[ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://escenes/character/character.tscn" id="2_phlfo"]
+
+[node name="Movement" type="Node2D" unique_id=1840989404]
+
+[node name="Gui" parent="." unique_id=1116073834 instance=ExtResource("1_joalw")]
+
+[node name="Character" parent="." unique_id=2003676814 instance=ExtResource("2_phlfo")]
+
+[connection signal="send_joystick" from="Gui" to="Character" method="receive_joystick"]
