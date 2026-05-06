@@ -5,7 +5,7 @@ const SPRITE_SCALE = 7
 
 var joystick : Area2D
 var direction : Vector2
-var speed = 2.0 * PPM * SPRITE_SCALE
+var speed = 3.0 * PPM * SPRITE_SCALE
 
 @export var animated_sprite : AnimatedSprite2D
 
@@ -20,9 +20,8 @@ func _physics_process(_delta: float) -> void:
 		direction = joystick.direction
 	else:
 		direction = Vector2.ZERO
-	
-	direction.x = Input.get_axis("ui_left", "ui_right")
-	direction.y = Input.get_axis("ui_up", "ui_down")
+		direction.x = Input.get_axis("ui_left", "ui_right")
+		direction.y = Input.get_axis("ui_up", "ui_down")
 	
 	velocity = direction * speed
 	move_and_slide()
