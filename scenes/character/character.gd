@@ -6,6 +6,8 @@ const SPRITE_SCALE = 7
 var joystick : Area2D
 var direction : Vector2
 var speed = 3.0 * PPM * SPRITE_SCALE
+var keyboard_side = Input.get_axis("ui_left", "ui_right")
+var keyboard_front = Input.get_axis("ui_up", "ui_down")
 
 @export var animated_sprite : AnimatedSprite2D
 
@@ -16,12 +18,16 @@ func _input(_event: InputEvent) -> void:
 	pass
 		
 func _physics_process(_delta: float) -> void:
+	if keyboard_front != null:
+		direction.y = keyboard_front
+	elif  keyboard_side != null:
+		direction.x = keyboard_side
+	
 	if joystick != null and is_instance_valid(joystick):
 		direction = joystick.direction
 	else:
 		direction = Vector2.ZERO
-		direction.x = Input.get_axis("ui_left", "ui_right")
-		direction.y = Input.get_axis("ui_up", "ui_down")
+	
 	
 	velocity = direction * speed
 	move_and_slide()

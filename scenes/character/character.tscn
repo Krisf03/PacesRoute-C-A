@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dodevgrfs6j2a"]
 
 [ext_resource type="Texture2D" uid="uid://dj62w23ajyy66" path="res://sprites/players/players blue x1.png" id="1_6u8o1"]
-[ext_resource type="Script" uid="uid://dcd6gcnic44bf" path="res://escenes/character/character.gd" id="1_8yiot"]
+[ext_resource type="Script" uid="uid://dcd6gcnic44bf" path="res://scenes/character/character.gd" id="1_8yiot"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8yiot"]
 atlas = ExtResource("1_6u8o1")
@@ -64,8 +64,8 @@ animated_sprite = NodePath("AnimatedSprite2D")
 texture_filter = 1
 scale = Vector2(7, 7)
 sprite_frames = SubResource("SpriteFrames_bs4tj")
-animation = &"idle"
-frame_progress = 0.7023269
+animation = &"Walk"
+frame_progress = 0.2003526
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668984670]
 position = Vector2(3.9999998, 46.999996)

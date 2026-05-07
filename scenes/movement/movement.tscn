@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://vj1et4qtk8l4"]
 
-[ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://escenes/gui/gui.tscn" id="1_joalw"]
-[ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://escenes/character/character.tscn" id="2_phlfo"]
+[ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://scenes/gui/gui.tscn" id="1_joalw"]
+[ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://scenes/character/character.tscn" id="2_phlfo"]
 
 [node name="Movement" type="Node2D" unique_id=1840989404]
 
