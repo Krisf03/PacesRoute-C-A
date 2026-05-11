@@ -16,15 +16,17 @@ func _input(_event: InputEvent) -> void:
 	pass
 		
 func _physics_process(_delta: float) -> void:
-	if joystick != null and is_instance_valid(joystick):
-		direction = joystick.direction
-	else:
-		direction = Input.get_vector(
+	var joystick_direction = Vector2.ZERO
+	var keyboard_direction = Input.get_vector(
 			"ui_left",
 			"ui_right",
 			"ui_up",
 			"ui_down"
 		)
+	if joystick != null and is_instance_valid(joystick):
+		joystick_direction = joystick.direction
+		
+		direction = joystick_direction + keyboard_direction
 
 	velocity = direction * speed
 	move_and_slide()
