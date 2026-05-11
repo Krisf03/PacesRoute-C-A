@@ -27,6 +27,7 @@ func _physics_process(_delta: float) -> void:
 		joystick_direction = joystick.direction
 		
 		direction = joystick_direction + keyboard_direction
+		direction = direction.normalized()
 
 	velocity = direction * speed
 	move_and_slide()
