@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const PPM = 32
-const SPRITE_SCALE = 7
+const SPRITE_SCALE = 2
 
 var joystick : Area2D
 var direction : Vector2
@@ -43,10 +43,10 @@ func _calculate_flip_h():
 func _animation_run():
 	if velocity != Vector2.ZERO:
 		animated_sprite.play("Walk")
-		animated_sprite.position.y =+ 32
+		animated_sprite.position.y =+ 6.5
 	else:
 		animated_sprite.play("idle")
-		animated_sprite.position.y =- 32
+		animated_sprite.position.y =- 6.5
 
 func receive_joystick(j : Area2D):
 	joystick = j

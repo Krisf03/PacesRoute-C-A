@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t5eusoicg10k"
-path="res://.godot/imported/tileset x1.png-72935e543f890d81fc0d5f4b30ddffc2.ctex"
+uid="uid://sltphge0mddm"
+path="res://.godot/imported/Potion 4.png-13c9fbc2f31d49dc0a824b064bcc4308.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tile_sets/tileset x1.png"
-dest_files=["res://.godot/imported/tileset x1.png-72935e543f890d81fc0d5f4b30ddffc2.ctex"]
+source_file="res://sprites/tile_sets/dungeon_gathering_free_version/Potion 4.png"
+dest_files=["res://.godot/imported/Potion 4.png-13c9fbc2f31d49dc0a824b064bcc4308.ctex"]
 
 [params]
 

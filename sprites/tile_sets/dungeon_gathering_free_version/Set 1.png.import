@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://v3x1rpa7yet"
-path="res://.godot/imported/tileset x2.png-036dea74753154d1ad70f3e87b35a8fe.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://b7fmls0oabrt4"
+valid=false
 
 [deps]
 
-source_file="res://sprites/tile_sets/tileset x2.png"
-dest_files=["res://.godot/imported/tileset x2.png-036dea74753154d1ad70f3e87b35a8fe.ctex"]
+source_file="res://sprites/tile_sets/dungeon_gathering_free_version/Set 1.png"
 
 [params]
 

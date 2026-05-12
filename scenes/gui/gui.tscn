@@ -8,4 +8,4 @@ script = ExtResource("1_5r0dk")
 joystick = NodePath("Joystick")
 
 [node name="Joystick" parent="." unique_id=318191342 instance=ExtResource("1_dvm05")]
-position = Vector2(178, 478)
+position = Vector2(52, 219)

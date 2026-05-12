@@ -52,22 +52,23 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4x07"]
-size = Vector2(9, 13)
+size = Vector2(12, 14)
 
 [node name="Character" type="CharacterBody2D" unique_id=2003676814 node_paths=PackedStringArray("animated_sprite")]
-position = Vector2(423, 170)
-collision_mask = 6
+collision_mask = 30
 script = ExtResource("1_8yiot")
 animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1206136880]
 texture_filter = 1
-scale = Vector2(7, 7)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_bs4tj")
 animation = &"Walk"
-frame_progress = 0.2003526
+frame_progress = 0.6559383
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668984670]
-position = Vector2(3.9999998, 46.999996)
-scale = Vector2(7, 7)
+position = Vector2(1, 4)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_b4x07")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=798988343]
