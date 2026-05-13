@@ -707,7 +707,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
-size = Vector2(35, 6)
+size = Vector2(35, 9)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("animated_sprite")]
 collision_layer = 16
@@ -721,5 +721,5 @@ animation = &"walk"
 frame_progress = 0.45940587
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
-position = Vector2(-0.5, 20)
+position = Vector2(-0.5, 18.5)
 shape = SubResource("RectangleShape2D_4a83h")
