@@ -1,17 +1,22 @@
 [gd_scene format=3 uid="uid://1d3j7n5ilvf3"]
 
 [ext_resource type="Script" uid="uid://bsy5ybxasi1pu" path="res://scenes/main_scene/main_scene.gd" id="1_nvhbv"]
-[ext_resource type="PackedScene" uid="uid://vj1et4qtk8l4" path="res://scenes/movement/movement.tscn" id="2_nvhbv"]
-[ext_resource type="PackedScene" uid="uid://dp1550fu1fxlg" path="res://scenes/spawn/spawn.tscn" id="2_o5t4i"]
+[ext_resource type="PackedScene" uid="uid://dp1550fu1fxlg" path="res://scenes/test_room/test_room.tscn" id="2_o5t4i"]
 [ext_resource type="PackedScene" uid="uid://b4ps1mselnbqi" path="res://scenes/enemy/enemy.tscn" id="4_34m6u"]
+[ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://scenes/gui/gui.tscn" id="5_2cqfw"]
+[ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://scenes/character/character.tscn" id="5_kbdpr"]
 
 [node name="MainScene" type="Node2D" unique_id=1641207472]
 script = ExtResource("1_nvhbv")
 
-[node name="Spawn" parent="." unique_id=196487757 instance=ExtResource("2_o5t4i")]
-
-[node name="Movement" parent="." unique_id=1840989404 instance=ExtResource("2_nvhbv")]
-position = Vector2(396, 42)
+[node name="TestRoom" parent="." unique_id=196487757 instance=ExtResource("2_o5t4i")]
 
 [node name="Enemy" parent="." unique_id=1129625752 instance=ExtResource("4_34m6u")]
 position = Vector2(228, 124)
+
+[node name="Character" parent="." unique_id=2003676814 instance=ExtResource("5_kbdpr")]
+position = Vector2(32, 145)
+
+[node name="Gui" parent="." unique_id=1116073834 instance=ExtResource("5_2cqfw")]
+
+[connection signal="send_joystick" from="Gui" to="Character" method="receive_joystick"]

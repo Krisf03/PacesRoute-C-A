@@ -72,3 +72,5 @@ scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_b4x07")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=798988343]
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1024366822]

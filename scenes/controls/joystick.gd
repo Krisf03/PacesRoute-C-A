@@ -2,8 +2,9 @@ extends Area2D
 
 class_name Joystick
 
-#Variables para calcular distancia y dirección del toque más adelante
+signal send_joystick(j : Area2D)
 
+#Variables para calcular distancia y dirección del toque más adelante
 var distance:float
 var direction:Vector2
 
@@ -16,7 +17,7 @@ var index = -1 #Variable para definir cuantos dedos pueden usar el joystick
 @onready var radius = $CollisionShape2D.shape.radius
 
 func _ready() -> void: 
-	pass
+	send_joystick.emit()
 	
 #Funcion para manejar los inputs del teclado con el touch
 

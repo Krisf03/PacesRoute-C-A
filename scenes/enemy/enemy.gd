@@ -13,7 +13,7 @@ var right_limit := 450
 func _ready() -> void:
 	direction = Vector2(1, 0)
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if position.x < left_limit:
 		direction = Vector2(1, 0)
 	if position.x > right_limit:
