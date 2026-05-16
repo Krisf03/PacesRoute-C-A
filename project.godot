@@ -15,17 +15,33 @@ run/main_scene="uid://1d3j7n5ilvf3"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DialogueManager="*uid://c3rodes2l3gxb"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://scenes/dialogue/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=480
 window/size/viewport_height=270
-window/size/window_width_override=1440
-window/size/window_height_override=810
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogues/test_greeting.dialogue")
 
 [layer_names]
 

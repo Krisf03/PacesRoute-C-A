@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://dejlirvax3g55"
+path="res://.godot/imported/test_greeting.dialogue-7ead2f4caf0aafedbb3fd1f5e432f47e.tres"
+
+[deps]
+
+source_file="res://dialogues/test_greeting.dialogue"
+dest_files=["res://.godot/imported/test_greeting.dialogue-7ead2f4caf0aafedbb3fd1f5e432f47e.tres"]
+
+[params]
+
+defaults=true

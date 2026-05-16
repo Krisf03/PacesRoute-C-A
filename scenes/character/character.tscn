@@ -54,6 +54,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4x07"]
 size = Vector2(12, 14)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuyo6"]
+size = Vector2(42, 53)
+
 [node name="Character" type="CharacterBody2D" unique_id=2003676814 node_paths=PackedStringArray("animated_sprite")]
 collision_mask = 30
 script = ExtResource("1_8yiot")
@@ -73,4 +76,8 @@ shape = SubResource("RectangleShape2D_b4x07")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=798988343]
 
-[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1024366822]
+[node name="Area2D" type="Area2D" parent="." unique_id=748204980]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=928240561]
+position = Vector2(1, 1.5)
+shape = SubResource("RectangleShape2D_cuyo6")

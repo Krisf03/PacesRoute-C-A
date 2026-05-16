@@ -1,0 +1,15 @@
+~ start
+Enemigo01: [[¡Déjame caminar!|¡No te atravieses!|¡Fuera del camino!]] 
+Y/N: [speed=0.1] [wave]Perdona...[/wave]
+~ indignation
+Enemigo01: [speed=0.4]Ya no hay respeto por los tranceuntes estos días...
+- ¿Qué has dicho? => indignation
+- Eso...[wait=0.5] ¡Eso no es verdad!
+%5 Enemigo01: [speed=0.3]Solo apártate por favor
+%2 Enemigo01: [speed=0.3]Cierra ya el ocico y apárta
+%2 Enemigo01: [speed=0.3]Deja el drama y quítate
+%1 Enemigo01: [speed=0.3]Felicidades, esta línea solo tenía el 10% de chances de aparecer
+- Apartarte
+	Gracias...
+- No hacerlo
+	Pues lo que te llevas >:v
