@@ -9,9 +9,6 @@ var joystick : Area2D
 var direction : Vector2
 var speed = 3.0 * PPM * SPRITE_SCALE
 
-#Variiable para detectar si se está en dialogo
-var _is_dialogue_active := false
-
 #variable para la animación 
 @export var animated_sprite : AnimatedSprite2D
 
@@ -27,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 	#diferencia entre dirección de joystick y dirección del teclado 
 	var joystick_direction = Vector2.ZERO
 	var keyboard_direction : Vector2
-	if _is_dialogue_active == false:
+	if GameManager.is_dialogue_active == false:
 		keyboard_direction = Input.get_vector(
 			"ui_left",
 			"ui_right",
@@ -36,7 +33,7 @@ func _physics_process(_delta: float) -> void:
 		)
 
 	#calcula la dirección del joystick y lo mete en su variable 
-	if joystick != null and is_instance_valid(joystick) and _is_dialogue_active == false:
+	if joystick != null and is_instance_valid(joystick) and GameManager.is_dialogue_active == false:
 		joystick_direction = joystick.direction
 
 	#suma las variables, para que no decidir una u otra, y se normaliza para evitar velocidades exageradas
@@ -69,12 +66,9 @@ func receive_joystick(j: Area2D) -> void:
 
 #Activar dialogo
 func _on_dialogue_started(_dialogue):
-	_is_dialogue_active = true
+	GameManager.is_dialogue_active = true
 
 #Terminar dialogo
 func _on_dialogue_ended(_dialogue):
 	await get_tree().create_timer(0.2).timeout
-	_is_dialogue_active = false
-func _process(_delta: float) -> void:
-	if _is_dialogue_active == false:
-		pass
+	GameManager.is_dialogue_active = false

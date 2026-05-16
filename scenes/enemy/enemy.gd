@@ -17,9 +17,6 @@ var right_limit := 450
 #Variable para detectar al jugador
 var is_player_close := false
 
-#Variiable para detectar si se está en dialogo
-var _is_dialogue_active := false
-
 #Variable animación
 @export var animated_sprite : AnimatedSprite2D
 
@@ -64,14 +61,14 @@ func _area_exited(_area):
 
 #Activar dialogo
 func _on_dialogue_started(_dialogue):
-	_is_dialogue_active = true
+	GameManager.is_dialogue_active = true
 
 #Terminar dialogo
 func _on_dialogue_ended(_dialogue):
 	await get_tree().create_timer(0.2).timeout
-	_is_dialogue_active = false
+	GameManager.is_dialogue_active = false
 
 #Estar pendiente a iniciar el dialogo
 func _process(_delta: float) -> void:
-	if is_player_close and Input.is_action_just_pressed("ui_accept") and _is_dialogue_active == false:
+	if is_player_close and Input.is_action_just_pressed("ui_accept") and GameManager.is_dialogue_active == false:
 		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
