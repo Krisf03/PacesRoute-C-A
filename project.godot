@@ -28,8 +28,8 @@ runtime/balloon_path="res://scenes/dialogue/balloon.tscn"
 
 window/size/viewport_width=480
 window/size/viewport_height=270
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
@@ -42,7 +42,7 @@ pointing/emulate_touch_from_mouse=true
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/test_greeting.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/test_greeting.dialogue", "res://dialogues/interact_tutorial.dialogue")
 
 [layer_names]
 

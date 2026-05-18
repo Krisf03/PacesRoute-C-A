@@ -119,11 +119,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -85.0
-offset_bottom = 41.0
+offset_left = 0.9999962
+offset_top = -89.000015
+offset_right = 71.0
+offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(1.0008233, 0.686607)
+scale = Vector2(0.8829599, 0.79159206)
 
 [node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer" unique_id=810051587]
 clip_children = 2
@@ -152,6 +154,7 @@ scroll_active = false
 
 [node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1225160028 instance=ExtResource("2_a8ve6")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(440, 1)
 layout_mode = 2
 size_flags_vertical = 3
 text = "Dialogue..."

@@ -11,11 +11,11 @@ script = ExtResource("1_nvhbv")
 
 [node name="TestRoom" parent="." unique_id=196487757 instance=ExtResource("2_o5t4i")]
 
-[node name="Enemy" parent="." unique_id=1129625752 instance=ExtResource("4_34m6u")]
-position = Vector2(228, 124)
-
 [node name="Character" parent="." unique_id=2003676814 instance=ExtResource("5_kbdpr")]
 position = Vector2(32, 145)
+
+[node name="Enemy" parent="." unique_id=1129625752 instance=ExtResource("4_34m6u")]
+position = Vector2(228, 124)
 
 [node name="Gui" parent="." unique_id=1116073834 instance=ExtResource("5_2cqfw")]
 
