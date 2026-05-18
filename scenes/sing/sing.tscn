@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dicr0foktycvs"]
+
+[ext_resource type="Texture2D" uid="uid://dj0cwk2s7m7xb" path="res://sprites/mystic_woods_free_2.2/sprites/objects/objects.png" id="1_8l0a7"]
+[ext_resource type="Script" uid="uid://7vr50hqbn8ys" path="res://scenes/sing/sing.gd" id="1_gmkuw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmkuw"]
+atlas = ExtResource("1_8l0a7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8l0a7"]
+size = Vector2(28, 24)
+
+[node name="Sing" type="Node2D" unique_id=924251343]
+script = ExtResource("1_gmkuw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2089411010]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_gmkuw")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=188260942]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=449465603]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_8l0a7")
+
+[connection signal="area_entered" from="Area2D" to="." method="_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_area_exited"]

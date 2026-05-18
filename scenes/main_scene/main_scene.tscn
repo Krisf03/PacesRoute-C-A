@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ps1mselnbqi" path="res://scenes/enemy/enemy.tscn" id="4_34m6u"]
 [ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://scenes/gui/gui.tscn" id="5_2cqfw"]
 [ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://scenes/character/character.tscn" id="5_kbdpr"]
+[ext_resource type="PackedScene" uid="uid://dicr0foktycvs" path="res://scenes/sing/sing.tscn" id="6_kbdpr"]
 
 [node name="MainScene" type="Node2D" unique_id=1641207472]
 script = ExtResource("1_nvhbv")
@@ -18,5 +19,8 @@ position = Vector2(32, 145)
 position = Vector2(228, 124)
 
 [node name="Gui" parent="." unique_id=1116073834 instance=ExtResource("5_2cqfw")]
+
+[node name="Sing" parent="." unique_id=924251343 instance=ExtResource("6_kbdpr")]
+position = Vector2(513, 127)
 
 [connection signal="send_joystick" from="Gui" to="Character" method="receive_joystick"]
