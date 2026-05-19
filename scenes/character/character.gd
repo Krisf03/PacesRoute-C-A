@@ -1,5 +1,15 @@
 extends CharacterBody2D
 
+var _last_movement_animation := "idle_front"
+
+#diccionario para la animación según la dirección del personaje 
+
+var animaciones = {Vector2.RIGHT: "run_horizontal", 
+Vector2.LEFT: "run_horizontal",
+Vector2.UP: "run_back",
+Vector2.DOWN: "run_front"
+}
+
 #Constantes de velocidad según la escala del personaje
 const PPM = 32
 const SPRITE_SCALE = 2
@@ -10,10 +20,7 @@ var direction : Vector2
 var speed = 3.0 * PPM * SPRITE_SCALE
 
 #variable para la animación 
-@export var animated_sprite : AnimatedSprite2D
-
-#variable para detectar objetos interactuables con raycast
-@export var interact : RayCast2D
+@export var _animated_sprite : AnimatedSprite2D
 
 func _ready() -> void:
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
@@ -50,16 +57,26 @@ func _physics_process(_delta: float) -> void:
 #para que mire en la dirección correcta 
 func _calculate_flip_h():
 	if !is_zero_approx(direction.x):
-		animated_sprite.flip_h = direction.x < 0
+		_animated_sprite.flip_h = direction.x < 0
 		
 #para que la animación funcione en cada frame
 func _animation_run():
-	if velocity != Vector2.ZERO:
-		animated_sprite.play("Walk")
-		animated_sprite.position.y =+ 6.5
+	if _animated_sprite == null:
+		return
+		
+	if direction != Vector2.ZERO:
+		# El personaje se está moviendo
+		var rounded_direction = direction.snapped(Vector2.ONE) 
+
+		if animaciones.has(rounded_direction):
+			var animation_name = animaciones[rounded_direction]
+			_animated_sprite.play(animation_name)
+			# GUARDAMOS LA ANIMACIÓN: Recordamos qué animación de correr se usó
+			_last_movement_animation = animation_name
 	else:
-		animated_sprite.play("idle")
-		animated_sprite.position.y =- 6.5
+		# EL PERSONAJE SE DETUVO: Cambiamos "run_" por "idle_" usando la última animación guardada
+		var idle_animation = _last_movement_animation.replace("run_", "idle_")
+		_animated_sprite.play(idle_animation)
 
 func receive_joystick(j: Area2D) -> void:
 	joystick = j
