@@ -23,6 +23,8 @@ var speed = 3.0 * PPM * SPRITE_SCALE
 @export var _animated_sprite : AnimatedSprite2D
 
 func _ready() -> void:
+	platform_floor_layers = 0
+	platform_wall_layers = 0
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 

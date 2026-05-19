@@ -21,6 +21,8 @@ var is_player_close := false
 @export var animated_sprite : AnimatedSprite2D
 
 func _ready() -> void:
+	platform_wall_layers = 0
+	platform_floor_layers = 0
 	#Mover el personaje apenas iniciar
 	direction = Vector2(1, 0)
 
