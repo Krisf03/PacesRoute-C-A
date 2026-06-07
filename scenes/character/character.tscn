@@ -431,16 +431,20 @@ size = Vector2(11.882022, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuyo6"]
 size = Vector2(42, 53)
 
-[node name="Character" type="CharacterBody2D" unique_id=2003676814 node_paths=PackedStringArray("_animated_sprite")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mutn8"]
+size = Vector2(42, 51)
+
+[node name="Character" type="CharacterBody2D" unique_id=2003676814 node_paths=PackedStringArray("_animated_sprite", "_attack_area")]
 collision_mask = 30
 script = ExtResource("1_8yiot")
 _animated_sprite = NodePath("AnimatedSprite2D")
+_attack_area = NodePath("AttackArea2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1206136880]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_bs4tj")
-animation = &"run_horizontal"
+animation = &"attack_back"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668984670]
 position = Vector2(0.49999976, 15)
@@ -449,8 +453,17 @@ shape = SubResource("RectangleShape2D_b4x07")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=798988343]
 
-[node name="Area2D" type="Area2D" parent="." unique_id=748204980]
+[node name="InteractionArea2D" type="Area2D" parent="." unique_id=748204980]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=928240561]
-position = Vector2(1, 15)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D" unique_id=928240561]
+position = Vector2(0, 15)
 shape = SubResource("RectangleShape2D_cuyo6")
+
+[node name="AttackArea2D" type="Area2D" parent="." unique_id=557802130]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=444224225]
+position = Vector2(0, 15.5)
+shape = SubResource("RectangleShape2D_mutn8")
+
+[connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_body_entered"]

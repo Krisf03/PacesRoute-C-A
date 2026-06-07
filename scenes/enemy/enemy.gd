@@ -72,5 +72,22 @@ func _on_dialogue_ended(_dialogue):
 
 #Estar pendiente a iniciar el dialogo
 func _process(_delta: float) -> void:
-	if is_player_close and Input.is_action_just_pressed("ui_accept") and GameManager.is_dialogue_active == false:
+	if is_player_close and Input.is_action_just_pressed("interact") and GameManager.is_dialogue_active == false:
 		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
+		
+#Controlador enemigo
+
+#variables de estadísticas
+var _health = 3
+
+func _take_damage(amount):
+	print("recibí daño: ", amount)
+	_health -= amount
+	print("Vida actual: ", _health)
+	
+	if _health <= 0:
+		_die()
+
+func  _die():
+	print("ME MORÍ")
+	queue_free()

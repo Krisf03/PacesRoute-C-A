@@ -18,4 +18,4 @@ position = Vector2(358, 189)
 scale = Vector2(1.5, 1.5)
 texture_normal = ExtResource("3_lrwm8")
 texture_pressed = ExtResource("4_l6o8f")
-action = "ui_accept"
+action = "interact"
