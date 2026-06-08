@@ -125,7 +125,7 @@ func _take_damage(amount : int):
 
 #Función para manejar la muerte del jugador
 func _die():
-	print("TE MORITE")
+	print("TE MORISTE")
 	CharacterManager.is_dead = true
 	_dead_animation()
 

@@ -54,7 +54,7 @@ func _physics_process(_delta: float) -> void:
 
 #Estar pendiente a iniciar el dialogo
 func _process(_delta: float) -> void:
-	if is_player_close and Input.is_action_just_pressed("interact") and GameManager.is_dialogue_active == false:
+	if is_player_close and Input.is_action_just_pressed("interact") and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
 		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
 		
 	if is_player_close and EnemyManager.can_attack == true and EnemyManager.player_ref != null and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
