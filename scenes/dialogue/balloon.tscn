@@ -105,6 +105,7 @@ script = ExtResource("1_36de5")
 
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -114,52 +115,70 @@ grow_vertical = 2
 theme = SubResource("Theme_qq3yp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon" unique_id=1011109179]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 0.9999962
-offset_top = -89.000015
-offset_right = 71.0
-offset_bottom = 37.0
+offset_top = -114.0
+offset_right = 56.888916
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 0
-scale = Vector2(0.8829599, 0.79159206)
+scale = Vector2(0.9, 0.9)
 
 [node name="PanelContainer" type="PanelContainer" parent="Balloon/MarginContainer" unique_id=810051587]
 clip_children = 2
+texture_filter = 1
 layout_mode = 2
 mouse_filter = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Balloon/MarginContainer/PanelContainer" unique_id=1030936092]
+texture_filter = 1
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=1428277592]
+texture_filter = 1
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1624289611]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=507199029]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 1
 layout_mode = 2
+size_flags_vertical = 0
 mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
 bbcode_enabled = true
 text = "Character"
 fit_content = true
 scroll_active = false
+vertical_alignment = 1
 
 [node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1225160028 instance=ExtResource("2_a8ve6")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 1)
+texture_filter = 1
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 10
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
 text = "Dialogue..."
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1162966119]
+texture_filter = 1
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_vertical = 8
@@ -174,19 +193,19 @@ autoplay = &"progress"
 
 [node name="ResponsesMenu" type="VBoxContainer" parent="Balloon" unique_id=966297223 node_paths=PackedStringArray("response_template")]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = 24.000015
-offset_right = 533.0
-offset_bottom = 94.000015
+offset_left = -150.0
+offset_top = -69.0
+offset_right = 150.0
+offset_bottom = -35.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.48565072, 0.4939386)
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
@@ -194,6 +213,7 @@ script = ExtResource("3_72ixx")
 response_template = NodePath("ResponseExample")
 
 [node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu" unique_id=914537232]
+texture_filter = 1
 layout_mode = 2
 text = "Response example"
 
