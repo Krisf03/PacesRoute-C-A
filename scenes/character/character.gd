@@ -25,6 +25,12 @@ var _facing_direction := Vector2.DOWN
 #variable para saber si está atacando
 var _is_attacking := false
 
+#Variables y constantes para el knockback
+var _knockback_velocity := Vector2.ZERO
+
+const _KNOCKBACK_FORCE := 600.0
+const _KNOCKBACK_DECAY := 2000.0
+
 #variable para la animación 
 @export var _animated_sprite : AnimatedSprite2D
 
@@ -44,7 +50,7 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 #función para el movimiento del personaje 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#diferencia entre dirección de joystick y dirección del teclado 
 	var joystick_direction := Vector2.ZERO
 	var keyboard_direction := Vector2.ZERO
@@ -68,12 +74,16 @@ func _physics_process(_delta: float) -> void:
 	if direction != Vector2.ZERO:
 		_facing_direction = direction
 	
-	velocity = direction * speed
+	#Reducir gradualmente el knockback hasta 0 usando "delta"
+	_knockback_velocity = _knockback_velocity.move_toward(Vector2.ZERO, _KNOCKBACK_DECAY * delta)
+	
+	#Combinamos el movimiento del jugador con la fuerza del empuje
+	velocity = direction * speed + _knockback_velocity
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("attack") and CharacterManager.is_dead == false:
 		_attack()
-
+	
 	_calculate_flip_h()
 	
 	if CharacterManager.is_dead == false:
@@ -87,7 +97,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_attack_area_body_entered(body):
 	if _is_attacking == true:
-		body._take_damage(CharacterManager.attack_damage)
+		body._take_damage(CharacterManager.attack_damage, global_position)
 
 #funcion que maneja el funcionamiento del ataque
 func _attack():
@@ -115,10 +125,14 @@ func _update_attack_position():
 			_attack_area.position = Vector2(0, -24)
 
 #Función para recibir daño del enemigo
-func _take_damage(amount : int):
+func _take_damage(amount : int, source_position: Vector2):
 	print("Recibí daño: ", amount)
 	CharacterManager.health -= amount
 	print("Vida actual del jugador: ", CharacterManager.health)
+	
+	#Calculamos la dirección opuesta al atacante y aplicamos la fuerza
+	var knockback_direction = (global_position - source_position).normalized()
+	_knockback_velocity = knockback_direction * _KNOCKBACK_FORCE
 	
 	if CharacterManager.health <= 0:
 		_die()

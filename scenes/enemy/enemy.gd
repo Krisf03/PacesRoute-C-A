@@ -20,6 +20,12 @@ var right_limit := 450
 #Variable para detectar al jugador
 var is_player_close := false
 
+#Variables y constantes para el knockback
+var _knockback_velocity := Vector2.ZERO
+
+const _KNOCKBACK_FORCE := 450.0
+const _KNOCKBACK_DECAY := 1000.0
+
 #Variable animación
 @export var animated_sprite : AnimatedSprite2D
 
@@ -34,12 +40,18 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 #Movimiento del personaje de lado a lado
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if EnemyManager.is_dead == true:
+		return
 	if position.x < left_limit:
 		direction = Vector2(1, 0)
 	if position.x > right_limit:
 		direction = Vector2(-1, 0)
-	velocity = direction * speed
+		
+	#Reducir gradualmente el knockback hasta 0 usando "delta"
+	_knockback_velocity = _knockback_velocity.move_toward(Vector2.ZERO, _KNOCKBACK_DECAY * delta)
+	
+	velocity = direction * speed + _knockback_velocity
 	
 	if direction != Vector2.ZERO:
 		_facing_direction = direction
@@ -54,6 +66,8 @@ func _physics_process(_delta: float) -> void:
 
 #Estar pendiente a iniciar el dialogo
 func _process(_delta: float) -> void:
+	if EnemyManager.is_dead == true:
+		return
 	if is_player_close and Input.is_action_just_pressed("interact") and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
 		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
 		
@@ -62,17 +76,23 @@ func _process(_delta: float) -> void:
 
 #Voltear según a donde camina
 func _calculate_flip_h():
+	if EnemyManager.is_dead == true:
+		return
 	if !is_zero_approx(direction.x):
 		animated_sprite.flip_h = direction.x < 0
 
 #Animación
 func _animation_run():
+	if EnemyManager.is_dead == true:
+		return
 	if velocity != Vector2.ZERO:
 		animated_sprite.play("walk")
 	else:
 		animated_sprite.play("idle")
 
 func _attack_animation():
+	if EnemyManager.is_dead == true:
+		return
 	animated_sprite.play("header")
 	await  get_tree().create_timer(0.9).timeout
 	_animation_run()
@@ -93,6 +113,7 @@ func _attack_area_entered(area):
 
 func _attack_area_exited(area):
 	if area.owner == EnemyManager.player_ref:
+		await get_tree().create_timer(0.2).timeout
 		EnemyManager.player_ref = null
 
 #Activar dialogo
@@ -105,27 +126,47 @@ func _on_dialogue_ended(_dialogue):
 	GameManager.is_dialogue_active = false
 
 func _attack_player():
+	if EnemyManager.is_dead == true:
+		return
 	EnemyManager.can_attack = false
-	EnemyManager.player_ref._take_damage(EnemyManager.attack_damage)
 	
 	_attack_animation()
 	
+	await  get_tree().create_timer(0.5).timeout
+	
+	if EnemyManager.player_ref == null:
+		EnemyManager.can_attack = true
+		return
+	
+	EnemyManager.player_ref._take_damage(EnemyManager.attack_damage, global_position)
+	
 	await  get_tree().create_timer(EnemyManager.attack_cooldown).timeout
+	
 	EnemyManager.can_attack = true
 
-func _take_damage(amount):
+func _take_damage(amount: int, source_position: Vector2):
 	print("recibí daño: ", amount)
 	EnemyManager.health -= amount
 	print("Vida actual: ", EnemyManager.health)
+	
+	#Calculamos la dirección del empuje y la aplicamos
+	var knockback_direction = (global_position - source_position).normalized()
+	_knockback_velocity = knockback_direction * _KNOCKBACK_FORCE
 	
 	if EnemyManager.health <= 0:
 		_die()
 
 func  _die():
+	EnemyManager.is_dead = true
 	print("ME MORÍ")
+	animated_sprite.stop()
+	velocity = Vector2(0, 0)
+	await  get_tree().create_timer(1).timeout
 	queue_free()
 	
 func _update_attack_position():
+	if EnemyManager.is_dead == true:
+		return
 	if abs(_facing_direction.x) > abs(_facing_direction.y):
 		if _facing_direction.x > 0:
 			_attack_area.position = Vector2(24, 0)
