@@ -38,6 +38,9 @@ const _KNOCKBACK_DECAY := 2000.0
 @export var _attack_area : Area2D
 
 func _ready() -> void:
+	#Señales para eventos de diálogo
+	GameManager.player_steps_aside.connect(_on_dialogue_step_aside)
+	
 	#Desactivo el área de ataque
 	_attack_area.monitoring = false
 	
@@ -54,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	#diferencia entre dirección de joystick y dirección del teclado 
 	var joystick_direction := Vector2.ZERO
 	var keyboard_direction := Vector2.ZERO
-	if GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
+	if GameManager.is_dialogue_active == false and CharacterManager.is_dead == false and CharacterManager.the_game_controls == false:
 		keyboard_direction = Input.get_vector(
 			"ui_left",
 			"ui_right",
@@ -63,12 +66,13 @@ func _physics_process(delta: float) -> void:
 		)
 
 	#calcula la dirección del joystick y lo mete en su variable 
-	if joystick != null and is_instance_valid(joystick) and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
+	if joystick != null and is_instance_valid(joystick) and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false and CharacterManager.the_game_controls == false:
 		joystick_direction = joystick.direction
 
 	#suma las variables, para que no decidir una u otra, y se normaliza para evitar velocidades exageradas
-	direction = joystick_direction + keyboard_direction
-	direction = direction.normalized()
+	if CharacterManager.the_game_controls == false:
+		direction = joystick_direction + keyboard_direction
+		direction = direction.normalized()
 
 	#Cambiar la dirección hacia donde mira por si ataca
 	if direction != Vector2.ZERO:
@@ -81,7 +85,7 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed + _knockback_velocity
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("attack") and CharacterManager.is_dead == false:
+	if Input.is_action_just_pressed("attack") and CharacterManager.is_dead == false and GameManager.is_dialogue_active == false and CharacterManager.the_game_controls == false:
 		_attack()
 	
 	_calculate_flip_h()
@@ -193,3 +197,10 @@ func _on_dialogue_ended(_dialogue):
 func live():
 	CharacterManager.is_dead = false
 	CharacterManager.health = 5
+
+func _on_dialogue_step_aside():
+	print("El juago tiene el control")
+	CharacterManager.the_game_controls = true
+	direction = Vector2(0, 1)
+	await get_tree().create_timer(0.5).timeout
+	CharacterManager.the_game_controls = false

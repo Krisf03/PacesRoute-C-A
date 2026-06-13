@@ -5,3 +5,5 @@ var health := 5
 var attack_damage := 1
 
 var is_dead := false
+
+var the_game_controls := false

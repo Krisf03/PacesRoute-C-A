@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var can_attack := true
 @export var player_ref = null
 @export var is_dead := false
+@export var is_attacking := false
 
 #Constantes de velocidad en base a la escala
 const PPM = 32
@@ -16,14 +17,15 @@ const SPRITE_SCALE = 1
 const TEST_GREETING = preload("uid://dejlirvax3g55")
 
 var _facing_direction = Vector2.DOWN
+
 @export var _attack_area : Area2D
 
 #Variables para dirección y velocidad
 var direction : Vector2
 var speed = 3.0 * PPM * SPRITE_SCALE
 #Límite de movimiento en pixeles
-var left_limit := 40
-var right_limit := 450
+var left_limit := 600
+var right_limit := 1150
 
 #Variable para detectar al jugador
 var is_player_close := false
@@ -38,11 +40,16 @@ const _KNOCKBACK_DECAY := 1000.0
 @export var animated_sprite : AnimatedSprite2D
 
 func _ready() -> void:
+	animated_sprite.self_modulate = Color.GREEN
+	
+	#Señales para eventos de diálogo
+	GameManager.enemy_attacks.connect(_attack_player)
+	
 	platform_wall_layers = 0
 	platform_floor_layers = 0
 	#Mover el personaje apenas iniciar
 	direction = Vector2(1, 0)
-
+	
 	#Detectar si está en dialogo
 	DialogueManager.dialogue_started.connect(_on_dialogue_started)
 	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
@@ -51,6 +58,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead == true:
 		return
+	if GameManager.is_dialogue_active == true:
+		return
+	
+	#Patrulla
 	if position.x < left_limit:
 		direction = Vector2(1, 0)
 	if position.x > right_limit:
@@ -67,51 +78,30 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_calculate_flip_h()
 	
-	if can_attack == true:
+	if is_attacking == false:
 		_animation_run()
-		
+	
 	_update_attack_position()
 
 #Estar pendiente a iniciar el dialogo
 func _process(_delta: float) -> void:
 	if is_dead == true:
 		return
+	if is_player_close and Input.is_action_just_pressed("interact") and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
+		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
+		animated_sprite.stop()
+		GameManager.is_dialogue_active = true
 		
 	if is_player_close and can_attack == true and player_ref != null and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
 		_attack_player()
-
-#Voltear según a donde camina
-func _calculate_flip_h():
-	if is_dead == true:
-		return
-	if !is_zero_approx(direction.x):
-		animated_sprite.flip_h = direction.x < 0
-
-#Animación
-func _animation_run():
-	if is_dead == true:
-		return
-	if velocity != Vector2.ZERO:
-		animated_sprite.play("walk")
-	else:
-		animated_sprite.play("idle")
-
-func _attack_animation():
-	if is_dead == true:
-		return
-	animated_sprite.play("header")
-	await  get_tree().create_timer(0.9).timeout
-	_animation_run()
 
 #Detectar al personaje para una interacción
 func _area_entered(_area):
 	is_player_close = true
 
-
 #Detectar que el personaje se ha alejado
 func _area_exited(_area):
 	is_player_close = false
-
 
 func _attack_area_entered(area):
 	if area.owner != null and area.owner.has_method("_take_damage"):
@@ -134,21 +124,18 @@ func _on_dialogue_ended(_dialogue):
 func _attack_player():
 	if is_dead == true:
 		return
-	can_attack = false
-	
+		
+	is_attacking = true
 	_attack_animation()
-	
 	await  get_tree().create_timer(0.5).timeout
 	
 	if player_ref == null:
-		can_attack = true
+		is_attacking = false
 		return
 	
 	player_ref._take_damage(attack_damage, global_position)
-	
 	await  get_tree().create_timer(attack_cooldown).timeout
-	
-	can_attack = true
+	is_attacking = false
 
 func _take_damage(amount: int, source_position: Vector2):
 	print("recibí daño: ", amount)
@@ -183,3 +170,29 @@ func _update_attack_position():
 			_attack_area.position = Vector2(0, 24)
 		else:
 			_attack_area.position = Vector2(0, -24)
+
+#Animación
+func _animation_run():
+	if is_dead == true:
+		return
+	if GameManager.is_dialogue_active == true:
+		animated_sprite.stop()
+	else:
+		if velocity != Vector2.ZERO:
+			animated_sprite.play("walk")
+		else:
+			animated_sprite.play("idle")
+
+func _attack_animation():
+	if is_dead == true:
+		return
+	animated_sprite.play("header")
+	await  get_tree().create_timer(0.9).timeout
+	_animation_run()
+
+#Voltear según a donde camina
+func _calculate_flip_h():
+	if is_dead == true:
+		return
+	if !is_zero_approx(direction.x):
+		animated_sprite.flip_h = direction.x < 0

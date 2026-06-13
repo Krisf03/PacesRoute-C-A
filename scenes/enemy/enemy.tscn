@@ -707,10 +707,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
-size = Vector2(30, 13)
+size = Vector2(26, 13)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
-size = Vector2(39, 40)
+size = Vector2(33.5, 40.1875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
 size = Vector2(22, 26)
@@ -727,22 +727,24 @@ sprite_frames = SubResource("SpriteFrames_4efjx")
 animation = &"header"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
-position = Vector2(-2, 16.5)
+position = Vector2(-1, 16.5)
 shape = SubResource("RectangleShape2D_4a83h")
 
 [node name="InteractArea2D" type="Area2D" parent="." unique_id=67230660]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=149263155]
-position = Vector2(-0.5, 4)
+position = Vector2(-1.75, 3.09375)
 shape = SubResource("RectangleShape2D_a3pup")
 
 [node name="AttackArea2D" type="Area2D" parent="." unique_id=170552601]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1599479735]
-position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_40wdo")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
+rect = Rect2(-19, -17, 35, 41)
 
 [connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
 [connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]

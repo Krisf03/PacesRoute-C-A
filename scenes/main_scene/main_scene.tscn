@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ps1mselnbqi" path="res://scenes/enemy/enemy.tscn" id="4_34m6u"]
 [ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://scenes/gui/gui.tscn" id="5_2cqfw"]
 [ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://scenes/character/character.tscn" id="5_kbdpr"]
+[ext_resource type="Script" uid="uid://cm5tt5epbgb88" path="res://scenes/enemy/enemy_dialogue.gd" id="6_6loks"]
 [ext_resource type="PackedScene" uid="uid://dicr0foktycvs" path="res://scenes/sing/sing.tscn" id="6_kbdpr"]
 
 [node name="MainScene" type="Node2D" unique_id=1641207472]
@@ -20,6 +21,13 @@ position = Vector2(32, 145)
 
 [node name="Enemy" parent="." unique_id=1129625752 instance=ExtResource("4_34m6u")]
 position = Vector2(228, 124)
+
+[node name="EnemyDialogue" parent="." unique_id=1021668763 instance=ExtResource("4_34m6u")]
+position = Vector2(900, -100)
+script = ExtResource("6_6loks")
+health = 10
+can_attack = false
+is_attacking = false
 
 [node name="Gui" parent="." unique_id=1116073834 instance=ExtResource("5_2cqfw")]
 
