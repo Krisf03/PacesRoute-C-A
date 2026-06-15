@@ -3,7 +3,6 @@ extends CharacterBody2D
 var _last_movement_animation := "idle_front"
 
 #diccionario para la animación según la dirección del personaje 
-
 var animaciones = {Vector2.RIGHT: "run_horizontal", 
 Vector2.LEFT: "run_horizontal",
 Vector2.UP: "run_back",
@@ -47,10 +46,6 @@ func _ready() -> void:
 	#Arreglando bug de colisiones "efecto carrito"
 	platform_floor_layers = 0
 	platform_wall_layers = 0
-	
-	#Dialogos
-	DialogueManager.dialogue_started.connect(_on_dialogue_started)
-	DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
 
 #función para el movimiento del personaje 
 func _physics_process(delta: float) -> void:
@@ -97,23 +92,23 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("kill_player"):
 		_die()
 	if Input.is_action_just_pressed("revive_player"):
-		live()
+		revive()
+
+func receive_joystick(j: Area2D) -> void:
+	joystick = j
 
 func _on_attack_area_body_entered(body):
 	if _is_attacking == true:
 		body._take_damage(CharacterManager.attack_damage, global_position)
 
-#funcion que maneja el funcionamiento del ataque
-func _attack():
-	_update_attack_position()
-	_is_attacking = true
-	_attack_area.monitoring = true
-	_attack_animation()
-	
-	await  get_tree().create_timer(0.15).timeout
-	
-	_attack_area.monitoring = false
-	_is_attacking = false
+func _on_dialogue_step_aside():
+	#print("El juago tiene el control")
+	CharacterManager.the_game_controls = true
+	direction = Vector2(0, 1)
+	speed /= 3.9
+	await get_tree().create_timer(1).timeout
+	speed *= 3.9
+	CharacterManager.the_game_controls = false
 
 #funcion que define en que dirección sucederá el ataque
 func _update_attack_position():
@@ -128,11 +123,23 @@ func _update_attack_position():
 		else:
 			_attack_area.position = Vector2(0, -24)
 
+#funcion que maneja el funcionamiento del ataque
+func _attack():
+	_update_attack_position()
+	_is_attacking = true
+	_attack_area.monitoring = true
+	_attack_animation()
+	
+	await  get_tree().create_timer(0.15).timeout
+	
+	_attack_area.monitoring = false
+	_is_attacking = false
+
 #Función para recibir daño del enemigo
 func _take_damage(amount : int, source_position: Vector2):
-	print("Recibí daño: ", amount)
+	#print("Recibí daño: ", amount)
 	CharacterManager.health -= amount
-	print("Vida actual del jugador: ", CharacterManager.health)
+	#print("Vida actual del jugador: ", CharacterManager.health)
 	
 	#Calculamos la dirección opuesta al atacante y aplicamos la fuerza
 	var knockback_direction = (global_position - source_position).normalized()
@@ -143,9 +150,25 @@ func _take_damage(amount : int, source_position: Vector2):
 
 #Función para manejar la muerte del jugador
 func _die():
-	print("TE MORISTE")
+	#print("TE MORISTE")
 	CharacterManager.is_dead = true
 	_dead_animation()
+
+#Función que gestiona las animaciones de caminata
+func _animation_run():
+	if direction != Vector2.ZERO:
+		# El personaje se está moviendo
+		var rounded_direction = direction.snapped(Vector2.ONE) 
+
+		if animaciones.has(rounded_direction):
+			var animation_name = animaciones[rounded_direction]
+			_animated_sprite.play(animation_name)
+			# GUARDAMOS LA ANIMACIÓN: Recordamos qué animación de correr se usó
+			_last_movement_animation = animation_name
+	else:
+		# EL PERSONAJE SE DETUVO: Cambiamos "run_" por "idle_" usando la última animación guardada
+		var idle_animation = _last_movement_animation.replace("run_", "idle_")
+		_animated_sprite.play(idle_animation)
 
 #Función que gestiona las animaciones de ataque
 func _attack_animation():
@@ -165,42 +188,7 @@ func  _dead_animation():
 func _calculate_flip_h():
 	if !is_zero_approx(direction.x):
 		_animated_sprite.flip_h = direction.x < 0
-		
-#Función que gestiona las animaciones de caminata
-func _animation_run():
-	if direction != Vector2.ZERO:
-		# El personaje se está moviendo
-		var rounded_direction = direction.snapped(Vector2.ONE) 
 
-		if animaciones.has(rounded_direction):
-			var animation_name = animaciones[rounded_direction]
-			_animated_sprite.play(animation_name)
-			# GUARDAMOS LA ANIMACIÓN: Recordamos qué animación de correr se usó
-			_last_movement_animation = animation_name
-	else:
-		# EL PERSONAJE SE DETUVO: Cambiamos "run_" por "idle_" usando la última animación guardada
-		var idle_animation = _last_movement_animation.replace("run_", "idle_")
-		_animated_sprite.play(idle_animation)
-
-func receive_joystick(j: Area2D) -> void:
-	joystick = j
-
-#Activar dialogo
-func _on_dialogue_started(_dialogue):
-	GameManager.is_dialogue_active = true
-
-#Terminar dialogo
-func _on_dialogue_ended(_dialogue):
-	await get_tree().create_timer(0.2).timeout
-	GameManager.is_dialogue_active = false
-	
-func live():
+func revive():
 	CharacterManager.is_dead = false
-	CharacterManager.health = 5
-
-func _on_dialogue_step_aside():
-	print("El juago tiene el control")
-	CharacterManager.the_game_controls = true
-	direction = Vector2(0, 1)
-	await get_tree().create_timer(0.5).timeout
-	CharacterManager.the_game_controls = false
+	CharacterManager.health = CharacterManager.max_health
