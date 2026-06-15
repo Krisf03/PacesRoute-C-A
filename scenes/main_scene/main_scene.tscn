@@ -26,8 +26,11 @@ position = Vector2(228, 124)
 position = Vector2(900, -100)
 script = ExtResource("6_6loks")
 health = 10
+attack_cooldown = 0
 can_attack = false
 is_attacking = false
+left_limit = 600
+right_limit = 1150
 
 [node name="Gui" parent="." unique_id=1116073834 instance=ExtResource("5_2cqfw")]
 

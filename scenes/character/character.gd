@@ -3,10 +3,17 @@ extends CharacterBody2D
 var _last_movement_animation := "idle_front"
 
 #diccionario para la animación según la dirección del personaje 
-var animaciones = {Vector2.RIGHT: "run_horizontal", 
-Vector2.LEFT: "run_horizontal",
-Vector2.UP: "run_back",
-Vector2.DOWN: "run_front"
+var animaciones = {
+	Vector2.RIGHT: "run_horizontal", 
+	Vector2.LEFT: "run_horizontal",
+	Vector2.UP: "run_back",
+	Vector2.DOWN: "run_front",
+	
+	#Diagonales
+	Vector2(1, 1): "run_horizontal",
+	Vector2(-1, 1): "run_horizontal",
+	Vector2(1, -1): "run_horizontal",
+	Vector2(-1, -1): "run_horizontal"
 }
 
 #Constantes de velocidad según la escala del personaje
@@ -23,6 +30,7 @@ var _facing_direction := Vector2.DOWN
 
 #variable para saber si está atacando
 var _is_attacking := false
+var _can_attack := true
 
 #Variables y constantes para el knockback
 var _knockback_velocity := Vector2.ZERO
@@ -35,6 +43,8 @@ const _KNOCKBACK_DECAY := 2000.0
 
 #variable para el ataque
 @export var _attack_area : Area2D
+
+@export var _attack_cooldown = 1.0
 
 func _ready() -> void:
 	#Señales para eventos de diálogo
@@ -49,6 +59,9 @@ func _ready() -> void:
 
 #función para el movimiento del personaje 
 func _physics_process(delta: float) -> void:
+	if _is_attacking:
+		return
+	
 	#diferencia entre dirección de joystick y dirección del teclado 
 	var joystick_direction := Vector2.ZERO
 	var keyboard_direction := Vector2.ZERO
@@ -80,7 +93,10 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed + _knockback_velocity
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("attack") and CharacterManager.is_dead == false and GameManager.is_dialogue_active == false and CharacterManager.the_game_controls == false:
+	if Input.is_action_just_pressed("attack") and not CharacterManager.is_dead \
+			and not GameManager.is_dialogue_active \
+			and not CharacterManager.the_game_controls \
+			and _can_attack:
 		_attack()
 	
 	_calculate_flip_h()
@@ -126,14 +142,17 @@ func _update_attack_position():
 #funcion que maneja el funcionamiento del ataque
 func _attack():
 	_update_attack_position()
+	_can_attack = false
 	_is_attacking = true
 	_attack_area.monitoring = true
 	_attack_animation()
 	
-	await  get_tree().create_timer(0.15).timeout
+	await  get_tree().create_timer(0.3).timeout
 	
 	_attack_area.monitoring = false
 	_is_attacking = false
+	await  get_tree().create_timer(_attack_cooldown).timeout
+	_can_attack = true
 
 #Función para recibir daño del enemigo
 func _take_damage(amount : int, source_position: Vector2):
@@ -176,6 +195,8 @@ func _attack_animation():
 		var attack_animation = _last_movement_animation.replace("run_", "attack_")
 		_animated_sprite.play(attack_animation)
 		await get_tree().create_timer(0.7).timeout
+	else:
+		_animation_run()
 
 #Función que gestiona las animaciones de muerte
 func  _dead_animation():

@@ -57,9 +57,7 @@ func _physics_process(delta: float) -> void:
 		
 	_calculate_flip_h()
 	
-	if is_dead:
-		return
-	if GameManager.is_dialogue_active:
+	if is_dead or GameManager.is_dialogue_active or is_attacking:
 		return
 	
 	#Patrulla
@@ -119,7 +117,7 @@ func _attack_player():
 	can_attack = false
 	is_attacking = true
 	_attack_animation()
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.6).timeout
 	
 	if player_ref == null:
 		is_attacking = false
@@ -145,8 +143,9 @@ func _die():
 	queue_free()
 
 func _animation_run():
-	if is_dead:
+	if is_dead or is_attacking:
 		return
+	
 	if GameManager.is_dialogue_active:
 		animated_sprite.play("walk")
 		animated_sprite.stop()
@@ -159,17 +158,17 @@ func _attack_animation():
 	if is_dead:
 		return
 	animated_sprite.play("header")
-	await get_tree().create_timer(0.9).timeout
+	await get_tree().create_timer(1).timeout
 	_animation_run()
 
 func _calculate_flip_h():
 	if is_dead:
 		return
 	
-	if is_player_close and GameManager.is_dialogue_active:
-		if player_ref.global_position.x > global_position.x:
+	if is_player_close and GameManager.is_dialogue_active or is_attacking:
+		if player_ref != null and player_ref.global_position.x > global_position.x:
 			animated_sprite.flip_h = false
-		else:
+		elif player_ref != null:
 			animated_sprite.flip_h = true
 	else:
 		if not is_zero_approx(direction.x):

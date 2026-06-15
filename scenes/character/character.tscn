@@ -17,19 +17,18 @@ collision_mask = 30
 script = ExtResource("1_8yiot")
 _animated_sprite = NodePath("AnimatedSprite2D")
 _attack_area = NodePath("AttackArea2D")
+_attack_cooldown = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1206136880]
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_cuyo6")
-animation = &"idle_front"
+animation = &"attack_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668984670]
 position = Vector2(0, 26.845493)
 scale = Vector2(2.2207513, 2.5094428)
 shape = SubResource("RectangleShape2D_b4x07")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=798988343]
 
 [node name="InteractionArea2D" type="Area2D" parent="." unique_id=748204980]
 
