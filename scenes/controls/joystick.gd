@@ -33,11 +33,11 @@ func _input(event: InputEvent) -> void:
 				index = -1
 				button.position = Vector2.ZERO
 				direction = Vector2.ZERO
-				
+	
 		else: #Se ejecuta si el input es al soltar el touch
 			button.position = Vector2.ZERO
 			direction = Vector2.ZERO
-			
+	
 	if event is InputEventScreenDrag: #Verifica si se arrastra el touch
 		if index == event.index:
 			distance = global_position.distance_to(event.position)

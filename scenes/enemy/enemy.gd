@@ -88,6 +88,8 @@ func _attack_area_entered(area):
 func _attack_area_exited(area):
 	if area.owner == player_ref:
 		await get_tree().create_timer(0.2).timeout
+		if not is_inside_tree():
+			return
 		player_ref = null
 
 func _update_attack_position():
@@ -112,6 +114,8 @@ func _attack_player():
 	_attack_animation()
 	
 	await  get_tree().create_timer(0.5).timeout
+	if not is_inside_tree():
+		return
 	
 	if player_ref == null:
 		can_attack = true
@@ -120,6 +124,8 @@ func _attack_player():
 	player_ref._take_damage(attack_damage, global_position)
 	
 	await  get_tree().create_timer(attack_cooldown).timeout
+	if not is_inside_tree():
+		return
 	
 	can_attack = true
 
@@ -141,6 +147,8 @@ func  _die():
 	animated_sprite.stop()
 	velocity = Vector2(0, 0)
 	await  get_tree().create_timer(1).timeout
+	if not is_inside_tree():
+		return
 	queue_free()
 	
 #Animación
@@ -157,6 +165,8 @@ func _attack_animation():
 		return
 	animated_sprite.play("header")
 	await  get_tree().create_timer(0.9).timeout
+	if not is_inside_tree():
+		return
 	_animation_run()
 
 #Voltear según a donde camina

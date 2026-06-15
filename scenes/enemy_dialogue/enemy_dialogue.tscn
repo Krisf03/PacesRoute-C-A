@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bpcdv0jq4axnk"]
+
+[ext_resource type="Script" uid="uid://cm5tt5epbgb88" path="res://scenes/enemy_dialogue/enemy_dialogue.gd" id="1_ectcb"]
+[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_0nlnv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
+size = Vector2(26, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
+size = Vector2(33.5, 40.1875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
+size = Vector2(22, 26)
+
+[node name="EnemyDialogue" type="CharacterBody2D" unique_id=2063824045 node_paths=PackedStringArray("_attack_area", "animated_sprite")]
+collision_layer = 16
+collision_mask = 29
+script = ExtResource("1_ectcb")
+health = 10
+attack_cooldown = 0
+can_attack = false
+_attack_area = NodePath("AttackArea2D")
+animated_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=233155333]
+sprite_frames = ExtResource("2_0nlnv")
+animation = &"header"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=747350134]
+position = Vector2(-1, 11.5)
+shape = SubResource("RectangleShape2D_4a83h")
+
+[node name="InteractArea2D" type="Area2D" parent="." unique_id=233893248]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=1079514351]
+position = Vector2(-1.75, 3.09375)
+shape = SubResource("RectangleShape2D_a3pup")
+
+[node name="AttackArea2D" type="Area2D" parent="." unique_id=1447039016]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1905189124]
+shape = SubResource("RectangleShape2D_40wdo")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1480359214]
+rect = Rect2(-19, -17, 35, 41)
+
+[connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
+[connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]
+[connection signal="area_entered" from="AttackArea2D" to="." method="_attack_area_entered"]
+[connection signal="area_exited" from="AttackArea2D" to="." method="_attack_area_exited"]
