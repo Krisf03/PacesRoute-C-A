@@ -59,7 +59,7 @@ func _ready() -> void:
 
 #función para el movimiento del personaje 
 func _physics_process(delta: float) -> void:
-	if _is_attacking:
+	if _is_attacking or DebugConsole._visible_state:
 		return
 	
 	#diferencia entre dirección de joystick y dirección del teclado 

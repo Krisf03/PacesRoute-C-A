@@ -527,5 +527,10 @@ func _on_input_submitted(text: String) -> void:
 	execute(text)
 	_cmd_input.clear()
 
+func _on_run_button_pressed() -> void:
+	execute(_cmd_input.text)
+	_cmd_input.clear()
+	_cmd_input.grab_focus()
+
 func _on_action_button_pressed(_command: String) -> void:
 	execute(_command)

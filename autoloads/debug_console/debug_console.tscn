@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://chpq4krre5y7s" path="res://fonts/' Mono Light.ttf" id="5_n77yc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_emb8l"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.11764706, 0.11764706, 0.11764706, 0.5254902)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -17,6 +17,9 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n1g7l"]
+bg_color = Color(0.11764706, 0.11764706, 0.11764706, 0.78431374)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k2xgr"]
 bg_color = Color(0, 0, 0, 1)
@@ -57,7 +60,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 1.5
 theme_override_fonts/font = ExtResource("4_n1g7l")
 theme_override_font_sizes/font_size = 10
 text = "Paces Route Debug"
@@ -74,10 +77,15 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_n77yc")
 theme_override_font_sizes/font_size = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_n1g7l")
 current_tab = 0
 
 [node name="Estado" type="MarginContainer" parent="RootPanel/Margin/VBox/Tabs" unique_id=1520078866]
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 metadata/_tab_index = 0
 
 [node name="StatusLabel" type="RichTextLabel" parent="RootPanel/Margin/VBox/Tabs/Estado" unique_id=1840721793]
@@ -100,8 +108,8 @@ metadata/_tab_index = 1
 [node name="ButtonGrid" type="GridContainer" parent="RootPanel/Margin/VBox/Tabs/Acciones" unique_id=261934203]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 2
-columns = 2
+size_flags_vertical = 3
+columns = 5
 
 [node name="Curar jugador" type="Button" parent="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid" unique_id=1137839985]
 layout_mode = 2
@@ -224,17 +232,18 @@ layout_mode = 2
 text = "▶"
 
 [connection signal="pressed" from="RootPanel/Margin/VBox/TitleBar/CloseBtn" to="." method="_toggle_console"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Curar jugador" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Matar jugador" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Revivir jugador" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/God Mode" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Matar enemigos" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Freeze enemigos" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Recargar escena" to="." method="_on_action_button_pressed"]
-[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Terminar diálogo" to="." method="_on_action_button_pressed"]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Curar jugador" to="." method="_on_action_button_pressed" binds= ["heal"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Matar jugador" to="." method="_on_action_button_pressed" binds= ["kill"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Revivir jugador" to="." method="_on_action_button_pressed" binds= ["revive"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/God Mode" to="." method="_on_action_button_pressed" binds= ["god"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Matar enemigos" to="." method="_on_action_button_pressed" binds= ["kill_enemies"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Freeze enemigos" to="." method="_on_action_button_pressed" binds= ["freeze_enemies"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Recargar escena" to="." method="_on_action_button_pressed" binds= ["reload"]]
+[connection signal="pressed" from="RootPanel/Margin/VBox/Tabs/Acciones/ButtonGrid/Terminar diálogo" to="." method="_on_action_button_pressed" binds= ["end_scene"]]
 [connection signal="changed" from="RootPanel/Margin/VBox/Tabs/Stats/StatsLits/Vida actual" to="RootPanel/Margin/VBox/Tabs/Stats/StatsLits" method="_on_vida_actual_changed"]
 [connection signal="changed" from="RootPanel/Margin/VBox/Tabs/Stats/StatsLits/Vida máxima" to="RootPanel/Margin/VBox/Tabs/Stats/StatsLits" method="_on_vida_máxima_changed"]
 [connection signal="changed" from="RootPanel/Margin/VBox/Tabs/Stats/StatsLits/Daño de ataque" to="RootPanel/Margin/VBox/Tabs/Stats/StatsLits" method="_on_daño_de_ataque_changed"]
 [connection signal="changed" from="RootPanel/Margin/VBox/Tabs/Stats/StatsLits/Velocidad" to="RootPanel/Margin/VBox/Tabs/Stats/StatsLits" method="_on_velocidad_changed"]
 [connection signal="changed" from="RootPanel/Margin/VBox/Tabs/Stats/StatsLits/HP Enemigos" to="RootPanel/Margin/VBox/Tabs/Stats/StatsLits" method="_on_hp_enemigos_changed"]
 [connection signal="text_submitted" from="RootPanel/Margin/VBox/InputRow/Input" to="." method="_on_input_submitted"]
+[connection signal="pressed" from="RootPanel/Margin/VBox/InputRow/RunBtn" to="." method="_on_run_button_pressed"]

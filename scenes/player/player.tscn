@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dodevgrfs6j2a"]
 
-[ext_resource type="Script" uid="uid://dcd6gcnic44bf" path="res://scenes/character/character.gd" id="1_8yiot"]
+[ext_resource type="Script" uid="uid://dcd6gcnic44bf" path="res://scenes/player/player.gd" id="1_8yiot"]
 [ext_resource type="SpriteFrames" uid="uid://wmy3226xwut3" path="res://sprites/character_sprite_frames/character_sprite_frames.tres" id="2_cuyo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4x07"]
@@ -12,7 +12,7 @@ size = Vector2(34, 44)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mutn8"]
 size = Vector2(34, 29)
 
-[node name="Character" type="CharacterBody2D" unique_id=2003676814 node_paths=PackedStringArray("_animated_sprite", "_attack_area")]
+[node name="Player" type="CharacterBody2D" unique_id=2003676814 node_paths=PackedStringArray("_animated_sprite", "_attack_area") groups=["player"]]
 collision_mask = 30
 script = ExtResource("1_8yiot")
 _animated_sprite = NodePath("AnimatedSprite2D")

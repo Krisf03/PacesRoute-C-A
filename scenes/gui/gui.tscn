@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dvbstj5ltsu6i" path="res://controller_icons/sprites/controller button 52.png" id="4_l6o8f"]
 [ext_resource type="Texture2D" uid="uid://comfg6gw6o2bq" path="res://controller_icons/sprites/controller button 1.png" id="5_lk2wq"]
 [ext_resource type="Texture2D" uid="uid://cdr4mp224hhra" path="res://controller_icons/sprites/controller button 51.png" id="6_g05bf"]
+[ext_resource type="Texture2D" uid="uid://dlh5jwdudd2vn" path="res://controller_icons/sprites/controller button 3.png" id="7_ort37"]
+[ext_resource type="Texture2D" uid="uid://c23nd0a34j8bv" path="res://controller_icons/sprites/controller button 53.png" id="8_gv5p5"]
 
 [node name="Gui" type="CanvasLayer" unique_id=1116073834 node_paths=PackedStringArray("joystick")]
 script = ExtResource("1_5r0dk")
@@ -29,3 +31,10 @@ scale = Vector2(1.5, 1.5)
 texture_normal = ExtResource("5_lk2wq")
 texture_pressed = ExtResource("6_g05bf")
 action = "attack"
+
+[node name="DebbugScreenButton" type="TouchScreenButton" parent="." unique_id=1996196984]
+modulate = Color(1, 1, 1, 0.29803923)
+position = Vector2(-20, 3)
+texture_normal = ExtResource("7_ort37")
+texture_pressed = ExtResource("8_gv5p5")
+action = "debug_toggle"
