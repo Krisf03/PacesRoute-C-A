@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b3moivpdvd04w"]
+
+[ext_resource type="Script" uid="uid://uqivv4e8wscb" path="res://autoloads/debug_console/debug_console.gd" id="1_1nbc7"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1358970637]
+script = ExtResource("1_1nbc7")
