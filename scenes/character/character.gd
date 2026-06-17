@@ -156,9 +156,10 @@ func _attack():
 
 #Función para recibir daño del enemigo
 func _take_damage(amount : int, source_position: Vector2):
-	#print("Recibí daño: ", amount)
+	if OS.is_debug_build() and DebugConsole.is_god_mode():
+		return
+	
 	CharacterManager.health -= amount
-	#print("Vida actual del jugador: ", CharacterManager.health)
 	
 	#Calculamos la dirección opuesta al atacante y aplicamos la fuerza
 	var knockback_direction = (global_position - source_position).normalized()
@@ -169,8 +170,9 @@ func _take_damage(amount : int, source_position: Vector2):
 
 #Función para manejar la muerte del jugador
 func _die():
-	#print("TE MORISTE")
 	CharacterManager.is_dead = true
+	if OS.is_debug_build():
+		DebugConsole.log_warning("Jugador murió")
 	_dead_animation()
 
 #Función que gestiona las animaciones de caminata

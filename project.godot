@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 DialogueManager="*uid://c3rodes2l3gxb"
 GameManager="*uid://qrachcdnhllp"
 CharacterManager="*uid://bpdvr1lbv5t34"
+DebugConsole="*uid://b3moivpdvd04w"
 
 [dialogue_manager]
 
