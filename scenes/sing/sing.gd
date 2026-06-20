@@ -5,14 +5,18 @@ var is_player_close := false
 #Constante que contiene la ruta del dialogo
 const _INTERACT_TUTORIAL = preload("res://dialogues/interact_tutorial.dialogue")
 
-func _area_entered(_area):
-	is_player_close = true
+func _area_entered(area):
+	if area.owner.is_in_group("player"):
+		is_player_close = true
 
-func _area_exited(_area):
-	is_player_close = false
+func _area_exited(area):
+	if area.owner.is_in_group("player"):
+		is_player_close = false
 
 func _process(_delta: float) -> void:
-	if is_player_close and Input.is_action_just_pressed("interact") and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false:
+	if is_player_close and Input.is_action_just_pressed("interact") \
+		and GameManager.is_dialogue_active == false \
+		and PlayerManager.is_dead == false:
 		DialogueManager.show_dialogue_balloon(_INTERACT_TUTORIAL, "start")
 
 #Iniciar diálogo

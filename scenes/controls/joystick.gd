@@ -18,7 +18,6 @@ var index = -1 #Variable para definir cuantos dedos pueden usar el joystick
 
 func _ready() -> void: 
 	send_joystick.emit()
-	
 #Funcion para manejar los inputs del teclado con el touch
 
 func _input(event: InputEvent) -> void:
@@ -29,14 +28,11 @@ func _input(event: InputEvent) -> void:
 				index = event.index
 				button.global_position = event.position #Tepea el centro del joystick al lugar del toque
 				direction = global_position.direction_to(button.global_position) * distance / radius #calcula qué tan lejos está el touch del centro y en qué dirección 
-			elif event.index == index: #si se acaba de soltar
-				index = -1
-				button.position = Vector2.ZERO
-				direction = Vector2.ZERO
-	
-		else: #Se ejecuta si el input es al soltar el touch
+		elif event.index == index and not event.is_pressed(): #Si se soltó el dedo que controla el joystick
+			index = -1
 			button.position = Vector2.ZERO
 			direction = Vector2.ZERO
+		# Sin else: ignoramos los toques de otros dedos (otros botones de la pantalla)
 	
 	if event is InputEventScreenDrag: #Verifica si se arrastra el touch
 		if index == event.index:

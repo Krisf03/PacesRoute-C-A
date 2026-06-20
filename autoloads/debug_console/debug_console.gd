@@ -30,6 +30,7 @@ var _player_ref      : CharacterBody2D = null
 
 # --- Referencias a nodos UI (se asignan vía @onready en la escena) ---
 @onready var _root_panel    : PanelContainer = $RootPanel
+@warning_ignore("unused_private_class_variable")
 @onready var _tab_container : TabContainer   = $RootPanel/Margin/VBox/Tabs
 @onready var _cmd_input     : LineEdit       = $RootPanel/Margin/VBox/InputRow/Input
 @onready var _log_output    : RichTextLabel  = $RootPanel/Margin/VBox/Tabs/Console/Log
@@ -61,7 +62,8 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	# Navegación de historial cuando el input está activo
-	if _visible_state and _cmd_input.has_focus() and event is InputEventKey and event.pressed:
+	if _visible_state and _cmd_input.has_focus() \
+		and event is InputEventKey and event.pressed:
 		match event.keycode:
 			KEY_UP:   _navigate_history(-1); get_viewport().set_input_as_handled()
 			KEY_DOWN: _navigate_history(1);  get_viewport().set_input_as_handled()
@@ -246,11 +248,11 @@ func execute(raw: String) -> void:
 # ── Jugador ──────────────────────────────────────────────────────
 
 func _cmd_heal() -> void:
-	CharacterManager.health = CharacterManager.max_health
-	if CharacterManager.is_dead:
+	PlayerManager.health = PlayerManager.max_health
+	if PlayerManager.is_dead:
 		_cmd_revive()
 		return
-	_log_success("Jugador curado → %d/%d HP" % [CharacterManager.health, CharacterManager.max_health])
+	_log_success("Jugador curado → %d/%d HP" % [PlayerManager.health, PlayerManager.max_health])
 	_refresh_status_tab()
 
 func _cmd_kill() -> void:
@@ -268,7 +270,7 @@ func _cmd_revive() -> void:
 		_log_error("Jugador no encontrado en escena.")
 		return
 	_player_ref.revive()
-	_log_success("Jugador revivido → %d/%d HP" % [CharacterManager.health, CharacterManager.max_health])
+	_log_success("Jugador revivido → %d/%d HP" % [PlayerManager.health, PlayerManager.max_health])
 	_refresh_status_tab()
 
 func _cmd_god() -> void:
@@ -279,28 +281,28 @@ func _cmd_god() -> void:
 
 func _cmd_set_health(args: Array) -> void:
 	var amount := int(args[0])
-	amount = clamp(amount, 0, CharacterManager.max_health)
-	CharacterManager.health = amount
-	if amount <= 0 and not CharacterManager.is_dead:
+	amount = clamp(amount, 0, PlayerManager.max_health)
+	PlayerManager.health = amount
+	if amount <= 0 and not PlayerManager.is_dead:
 		_cmd_kill()
-	elif amount > 0 and CharacterManager.is_dead:
+	elif amount > 0 and PlayerManager.is_dead:
 		_cmd_revive()
 	else:
-		_log_success("Vida → %d/%d" % [CharacterManager.health, CharacterManager.max_health])
+		_log_success("Vida → %d/%d" % [PlayerManager.health, PlayerManager.max_health])
 	_refresh_status_tab()
 
 func _cmd_set_max_hp(args: Array) -> void:
 	var amount := int(args[0])
 	amount = max(1, amount)
-	CharacterManager.max_health = amount
-	CharacterManager.health = min(CharacterManager.health, amount)
+	PlayerManager.max_health = amount
+	PlayerManager.health = min(PlayerManager.health, amount)
 	_log_success("Vida máxima → %d" % amount)
 	_refresh_status_tab()
 
 func _cmd_set_damage(args: Array) -> void:
 	var amount := int(args[0])
-	CharacterManager.attack_damage = max(0, amount)
-	_log_success("Daño de ataque → %d" % CharacterManager.attack_damage)
+	PlayerManager.attack_damage = max(0, amount)
+	_log_success("Daño de ataque → %d" % PlayerManager.attack_damage)
 	_refresh_status_tab()
 
 func _cmd_set_speed(args: Array) -> void:
@@ -500,10 +502,10 @@ func _refresh_status_tab() -> void:
 	
 	var text := ""
 	text += "[b][color=#aaddff]══ JUGADOR ══[/color][/b]\n"
-	text += "  Vida:          [color=#ff7777]%d[/color] / [color=#dddddd]%d[/color]\n" % [CharacterManager.health, CharacterManager.max_health]
-	text += "  Daño:          [color=#ffaa44]%d[/color]\n" % CharacterManager.attack_damage
+	text += "  Vida:          [color=#ff7777]%d[/color] / [color=#dddddd]%d[/color]\n" % [PlayerManager.health, PlayerManager.max_health]
+	text += "  Daño:          [color=#ffaa44]%d[/color]\n" % PlayerManager.attack_damage
 	text += "  Velocidad:     [color=#aaffaa]%.0f[/color]\n" % player_speed
-	text += "  Muerto:        [color=#ff5555]%s[/color]\n" % CharacterManager.is_dead
+	text += "  Muerto:        [color=#ff5555]%s[/color]\n" % PlayerManager.is_dead
 	text += "  God Mode:      [color=%s]%s[/color]\n" % ["#55ee88" if _god_mode else "#888888", _god_mode]
 	text += "\n"
 	text += "[b][color=#aaddff]══ JUEGO ══[/color][/b]\n"
@@ -526,6 +528,7 @@ func _refresh_status_tab() -> void:
 func _on_input_submitted(text: String) -> void:
 	execute(text)
 	_cmd_input.clear()
+	_cmd_input.grab_focus()
 
 func _on_run_button_pressed() -> void:
 	execute(_cmd_input.text)

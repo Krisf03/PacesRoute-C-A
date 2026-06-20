@@ -23,7 +23,7 @@ _attack_cooldown = 0.5
 texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_cuyo6")
-animation = &"attack_front"
+animation = &"idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668984670]
 position = Vector2(0, 26.845493)

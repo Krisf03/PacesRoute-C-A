@@ -19,8 +19,9 @@ config/icon="res://icon.svg"
 
 DialogueManager="*uid://c3rodes2l3gxb"
 GameManager="*uid://qrachcdnhllp"
-CharacterManager="*uid://bpdvr1lbv5t34"
+PlayerManager="*uid://bpdvr1lbv5t34"
 DebugConsole="*uid://b3moivpdvd04w"
+Transitioner="*uid://cax1ia8id2262"
 
 [dialogue_manager]
 
@@ -130,4 +131,5 @@ locale/translations_pot_files=PackedStringArray("res://dialogues/test_greeting.d
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

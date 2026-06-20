@@ -7,7 +7,9 @@ var is_dialogue_active := false
 var has_met_enemy01 = false
 
 #Eventos según las decisiones del jugador
+@warning_ignore("unused_signal")
 signal player_steps_aside
+@warning_ignore("unused_signal")
 signal enemy_attacks
 
 func  _ready() -> void:

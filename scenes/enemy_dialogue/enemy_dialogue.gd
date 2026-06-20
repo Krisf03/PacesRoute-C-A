@@ -86,7 +86,7 @@ func _process(_delta: float) -> void:
 	# Iniciar diálogo con interact
 	if is_player_close and Input.is_action_just_pressed("interact") \
 			and not GameManager.is_dialogue_active \
-			and not CharacterManager.is_dead:
+			and not PlayerManager.is_dead:
 		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
 		animated_sprite.stop()
 		GameManager.is_dialogue_active = true

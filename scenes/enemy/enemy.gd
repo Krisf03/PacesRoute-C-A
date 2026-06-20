@@ -69,8 +69,9 @@ func _physics_process(delta: float) -> void:
 	_update_attack_position()
 
 func  _process(_delta: float) -> void:
-	if player_ref != null and can_attack and not GameManager.is_dialogue_active \
-			and not CharacterManager.is_dead:
+	if player_ref != null and can_attack \
+		and not GameManager.is_dialogue_active \
+		and not PlayerManager.is_dead:
 		_attack_player()
 
 #Detectar al personaje para una interacción

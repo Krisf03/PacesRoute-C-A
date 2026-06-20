@@ -19,6 +19,9 @@ script = ExtResource("1_a3pup")
 _attack_area = NodePath("AttackArea2D")
 animated_sprite = NodePath("AnimatedSprite2D")
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
+rect = Rect2(-19, -17, 35, 41)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=279949239]
 sprite_frames = ExtResource("2_a3pup")
 animation = &"header"
@@ -39,9 +42,6 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1599479735]
 shape = SubResource("RectangleShape2D_40wdo")
-
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
-rect = Rect2(-19, -17, 35, 41)
 
 [connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
 [connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]

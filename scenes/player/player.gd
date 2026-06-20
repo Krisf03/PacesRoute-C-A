@@ -65,7 +65,9 @@ func _physics_process(delta: float) -> void:
 	#diferencia entre dirección de joystick y dirección del teclado 
 	var joystick_direction := Vector2.ZERO
 	var keyboard_direction := Vector2.ZERO
-	if GameManager.is_dialogue_active == false and CharacterManager.is_dead == false and CharacterManager.the_game_controls == false:
+	if not GameManager.is_dialogue_active \
+		and not PlayerManager.is_dead \
+		and not PlayerManager.the_game_controls:
 		keyboard_direction = Input.get_vector(
 			"ui_left",
 			"ui_right",
@@ -74,11 +76,14 @@ func _physics_process(delta: float) -> void:
 		)
 
 	#calcula la dirección del joystick y lo mete en su variable 
-	if joystick != null and is_instance_valid(joystick) and GameManager.is_dialogue_active == false and CharacterManager.is_dead == false and CharacterManager.the_game_controls == false:
+	if joystick != null and is_instance_valid(joystick) \
+		and not GameManager.is_dialogue_active \
+		and not PlayerManager.is_dead \
+		and not PlayerManager.the_game_controls:
 		joystick_direction = joystick.direction
 
 	#suma las variables, para que no decidir una u otra, y se normaliza para evitar velocidades exageradas
-	if CharacterManager.the_game_controls == false:
+	if PlayerManager.the_game_controls == false:
 		direction = joystick_direction + keyboard_direction
 		direction = direction.normalized()
 
@@ -93,15 +98,15 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed + _knockback_velocity
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("attack") and not CharacterManager.is_dead \
+	if Input.is_action_just_pressed("attack") and not PlayerManager.is_dead \
 			and not GameManager.is_dialogue_active \
-			and not CharacterManager.the_game_controls \
+			and not PlayerManager.the_game_controls \
 			and _can_attack:
 		_attack()
 	
 	_calculate_flip_h()
 	
-	if CharacterManager.is_dead == false:
+	if PlayerManager.is_dead == false:
 		if _is_attacking == false:
 			_animation_run()
 
@@ -115,16 +120,16 @@ func receive_joystick(j: Area2D) -> void:
 
 func _on_attack_area_body_entered(body):
 	if _is_attacking == true:
-		body._take_damage(CharacterManager.attack_damage, global_position)
+		body._take_damage(PlayerManager.attack_damage, global_position)
 
 func _on_dialogue_step_aside():
 	#print("El juago tiene el control")
-	CharacterManager.the_game_controls = true
+	PlayerManager.the_game_controls = true
 	direction = Vector2(0, 1)
 	speed /= 3.9
 	await get_tree().create_timer(1).timeout
 	speed *= 3.9
-	CharacterManager.the_game_controls = false
+	PlayerManager.the_game_controls = false
 
 #funcion que define en que dirección sucederá el ataque
 func _update_attack_position():
@@ -159,18 +164,18 @@ func _take_damage(amount : int, source_position: Vector2):
 	if OS.is_debug_build() and DebugConsole.is_god_mode():
 		return
 	
-	CharacterManager.health -= amount
+	PlayerManager.health -= amount
 	
 	#Calculamos la dirección opuesta al atacante y aplicamos la fuerza
 	var knockback_direction = (global_position - source_position).normalized()
 	_knockback_velocity = knockback_direction * _KNOCKBACK_FORCE
 	
-	if CharacterManager.health <= 0:
+	if PlayerManager.health <= 0:
 		_die()
 
 #Función para manejar la muerte del jugador
 func _die():
-	CharacterManager.is_dead = true
+	PlayerManager.is_dead = true
 	if OS.is_debug_build():
 		DebugConsole.log_warning("Jugador murió")
 	_dead_animation()
@@ -202,7 +207,7 @@ func _attack_animation():
 
 #Función que gestiona las animaciones de muerte
 func  _dead_animation():
-	if CharacterManager.is_dead == true:
+	if PlayerManager.is_dead == true:
 		_animated_sprite.play("die")
 		await get_tree().create_timer(0.5).timeout
 		_animated_sprite.play("died")
@@ -213,5 +218,5 @@ func _calculate_flip_h():
 		_animated_sprite.flip_h = direction.x < 0
 
 func revive():
-	CharacterManager.is_dead = false
-	CharacterManager.health = CharacterManager.max_health
+	PlayerManager.is_dead = false
+	PlayerManager.health = PlayerManager.max_health
