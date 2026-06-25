@@ -12,6 +12,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			PlayerManager.the_game_controls = true
 			Transitioner.transition_to_scene(next_scene)
 
+
 func _on_ice_area_area_entered(area: Area2D) -> void:
 	if area.owner.is_in_group("player"):
 		is_in_ice_zone = true

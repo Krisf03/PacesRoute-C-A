@@ -123,7 +123,6 @@ func _on_attack_area_body_entered(body):
 		body._take_damage(PlayerManager.attack_damage, global_position)
 
 func _on_dialogue_step_aside():
-	#print("El juago tiene el control")
 	PlayerManager.the_game_controls = true
 	direction = Vector2(0, 1)
 	speed /= 3.9
