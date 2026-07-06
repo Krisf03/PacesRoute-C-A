@@ -7,16 +7,25 @@
 atlas = ExtResource("1_8l0a7")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gmkuw"]
+size = Vector2(24, 12)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8l0a7"]
 size = Vector2(28, 24)
 
-[node name="Sing" type="Node2D" unique_id=924251343]
+[node name="StaticBody2D" type="StaticBody2D" unique_id=922536457]
+collision_layer = 12
+collision_mask = 17
 script = ExtResource("1_gmkuw")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2089411010]
 texture_filter = 1
 scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_gmkuw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=722557070]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_gmkuw")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=188260942]
 

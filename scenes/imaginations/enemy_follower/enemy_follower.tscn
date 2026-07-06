@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ebrqd4q36lte"]
+
+[ext_resource type="Script" uid="uid://cw7jxkvyxblra" path="res://scenes/imaginations/enemy_follower/enemy_follower.gd" id="1_vljij"]
+[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_msaqx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
+size = Vector2(26, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
+size = Vector2(33.5, 40.1875)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
+size = Vector2(22, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0fn3"]
+size = Vector2(440, 259)
+
+[node name="EnemyFollower" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("_attack_area", "_detection_area")]
+position = Vector2(240, 136)
+collision_layer = 16
+collision_mask = 29
+script = ExtResource("1_vljij")
+_attack_area = NodePath("AttackArea2D")
+_detection_area = NodePath("PlayerDetectionArea")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
+rect = Rect2(-19, -17, 35, 41)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=279949239]
+sprite_frames = ExtResource("2_msaqx")
+animation = &"header"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
+position = Vector2(-1, 11.5)
+shape = SubResource("RectangleShape2D_4a83h")
+
+[node name="InteractArea2D" type="Area2D" parent="." unique_id=67230660]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=149263155]
+position = Vector2(-1.75, 3.09375)
+shape = SubResource("RectangleShape2D_a3pup")
+
+[node name="AttackArea2D" type="Area2D" parent="." unique_id=170552601]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1599479735]
+shape = SubResource("RectangleShape2D_40wdo")
+
+[node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=19864679]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=2131723086]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_i0fn3")
+
+[connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
+[connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]
+[connection signal="area_entered" from="AttackArea2D" to="." method="_attack_area_entered"]
+[connection signal="area_exited" from="AttackArea2D" to="." method="_attack_area_exited"]

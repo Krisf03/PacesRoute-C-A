@@ -13,15 +13,19 @@ if not GameManager.has_met_enemy01
 	%1 Enemigo01: [speed=0.3]Felicidades, esta línea solo tenía el 10% de chances de aparecer
 	- Apartarte
 		Enemigo01: Gracias...
+		do GameManager.player_steps_aside.emit()
 	- No hacerlo
 		Enemigo01: Pues lo que te llevas >:v
+		do GameManager.enemy_attacks.emit()
 	set GameManager.has_met_enemy01 = true
 else
 	Enemigo01: ¿Otra vez tú?
 	Enemigo01: [speed=0.3]No me hagas repetirlo, aparta si no quieres un cabezaso
 	- Apartarte
 		Enemigo01: Gracias...
+		do GameManager.player_steps_aside.emit()
 	- No hacerlo
 		Enemigo01: Pues lo que te llevas >:v
+		do GameManager.enemy_attacks.emit()
 
 => END
