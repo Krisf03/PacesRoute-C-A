@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cax1ia8id2262"]
 
-[ext_resource type="Script" uid="uid://dx2si4e6f3w10" path="res://scenes/transitioner/transitioner.gd" id="1_o5vi7"]
+[ext_resource type="Script" uid="uid://dx2si4e6f3w10" path="res://scenes/ui/transitioner/transitioner.gd" id="1_o5vi7"]
 
 [sub_resource type="Animation" id="Animation_o5vi7"]
 length = 0.001

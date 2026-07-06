@@ -25,7 +25,7 @@ Transitioner="*uid://cax1ia8id2262"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://scenes/dialogue/balloon.tscn"
+runtime/balloon_path="res://scenes/ui/dialogue/balloon.tscn"
 
 [display]
 

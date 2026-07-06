@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4ps1mselnbqi"]
 
-[ext_resource type="Script" uid="uid://dcpemey68iyt5" path="res://scenes/enemy/enemy.gd" id="1_a3pup"]
+[ext_resource type="Script" uid="uid://dcpemey68iyt5" path="res://scenes/imaginations/enemy/enemy.gd" id="1_a3pup"]
 [ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_a3pup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
