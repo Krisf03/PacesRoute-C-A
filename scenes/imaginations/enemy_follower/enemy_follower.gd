@@ -21,8 +21,8 @@ var direction : Vector2
 var speed = 3.0 * PPM * SPRITE_SCALE
 
 # Límite de movimiento en pixeles (Patrullaje)
-var left_limit := 40
-var right_limit := 450
+var left_limit := 600
+var right_limit := 1150
 
 # Variable para almacenar al jugador cuando entra en el rango de persecución
 var chase_target: Node2D = null

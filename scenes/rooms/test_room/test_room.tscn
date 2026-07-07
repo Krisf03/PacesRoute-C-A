@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b4ps1mselnbqi" path="res://scenes/imaginations/enemy/enemy.tscn" id="4_2ape5"]
 [ext_resource type="PackedScene" uid="uid://bpcdv0jq4axnk" path="res://scenes/imaginations/enemy_dialogue/enemy_dialogue.tscn" id="5_lwucv"]
 [ext_resource type="PackedScene" uid="uid://ebrqd4q36lte" path="res://scenes/imaginations/enemy_follower/enemy_follower.tscn" id="6_a7baj"]
+[ext_resource type="PackedScene" uid="uid://bf0cqv0fsliyh" path="res://scenes/imaginations/enemy_elusive/enemy_elusive.tscn" id="7_loh55"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_56hba"]
 size = Vector2(16, 78)
@@ -47,5 +48,8 @@ position = Vector2(895, -5)
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1753352819]
 position = Vector2(-119, 115)
+
+[node name="EnemyElusive" parent="." unique_id=1855398736 instance=ExtResource("7_loh55")]
+position = Vector2(898, 99)
 
 [connection signal="area_entered" from="ExitArea2D" to="." method="_on_area_2d_area_entered"]

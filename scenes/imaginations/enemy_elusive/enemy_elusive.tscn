@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://ebrqd4q36lte"]
+[gd_scene format=3 uid="uid://bf0cqv0fsliyh"]
 
-[ext_resource type="Script" uid="uid://cw7jxkvyxblra" path="res://scenes/imaginations/enemy_follower/enemy_follower.gd" id="1_vljij"]
-[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_msaqx"]
+[ext_resource type="Script" uid="uid://2cldd4xisgdt" path="res://scenes/imaginations/enemy_elusive/enemy_elusive.gd" id="1_xyke8"]
+[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_p3gel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
 size = Vector2(26, 23)
@@ -12,23 +12,22 @@ size = Vector2(33.5, 40.1875)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
 size = Vector2(22, 26)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2g543"]
-radius = 150.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_xyke8"]
+radius = 200.0
 
-[node name="EnemyFollower" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("_attack_area", "_detection_area")]
-position = Vector2(240, 136)
+[node name="EnemyElusive" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("detection_area", "animated_sprite")]
 collision_layer = 16
 collision_mask = 29
-script = ExtResource("1_vljij")
-_attack_area = NodePath("AttackArea2D")
-_detection_area = NodePath("PlayerDetectionArea")
+script = ExtResource("1_xyke8")
+detection_area = NodePath("PlayerDetectionArea")
+animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
 rect = Rect2(-19, -17, 35, 41)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=279949239]
-self_modulate = Color(18.892157, 0, 0, 1)
-sprite_frames = ExtResource("2_msaqx")
+self_modulate = Color(0, 0, 1.1014822, 1)
+sprite_frames = ExtResource("2_p3gel")
 animation = &"header"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
@@ -48,13 +47,15 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1599479735]
 shape = SubResource("RectangleShape2D_40wdo")
 
-[node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=19864679]
+[node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=1275078427]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=2131723086]
-shape = SubResource("CircleShape2D_2g543")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=721139329]
+shape = SubResource("CircleShape2D_xyke8")
 
 [connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
 [connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]
 [connection signal="area_entered" from="AttackArea2D" to="." method="_attack_area_entered"]
 [connection signal="area_exited" from="AttackArea2D" to="." method="_attack_area_exited"]
+[connection signal="area_entered" from="PlayerDetectionArea" to="." method="_on_detection_area_entered"]
+[connection signal="area_exited" from="PlayerDetectionArea" to="." method="_on_detection_area_exited"]
