@@ -12,4 +12,4 @@ func transition_to_scene(target_room_path: String):
 	
 	animation_player.play("fade_from_black")
 	await animation_player.animation_finished
-	PlayerManager.the_game_controls = false
+	GameManager.the_game_controls = false

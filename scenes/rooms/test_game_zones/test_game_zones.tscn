@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://br51xoshs2ri7" path="res://scenes/rooms/test_game_zones/test_game_zones.gd" id="1_6bqxw"]
 [ext_resource type="TileSet" uid="uid://ddjjnqo6ty35v" path="res://tile_sets/ship_tile_set_placeholder.tres" id="2_m4trf"]
-[ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://scenes/ui/gui/gui.tscn" id="4_qpyni"]
+[ext_resource type="PackedScene" uid="uid://c6sm8u7sbwjf8" path="res://scenes/ui/mobile_controls/mobile_controls.tscn" id="4_qpyni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m4trf"]
 size = Vector2(261.23206, 284.54797)

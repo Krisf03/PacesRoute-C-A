@@ -15,13 +15,14 @@ size = Vector2(22, 26)
 [sub_resource type="CircleShape2D" id="CircleShape2D_2g543"]
 radius = 150.0
 
-[node name="EnemyFollower" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("_attack_area", "_detection_area")]
+[node name="EnemyFollower" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("_attack_area", "_detection_area", "animated_sprite") groups=["Enemies"]]
 position = Vector2(240, 136)
 collision_layer = 16
 collision_mask = 29
 script = ExtResource("1_vljij")
 _attack_area = NodePath("AttackArea2D")
 _detection_area = NodePath("PlayerDetectionArea")
+animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
 rect = Rect2(-19, -17, 35, 41)

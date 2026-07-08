@@ -33,7 +33,7 @@ const _KNOCKBACK_FORCE := 450.0
 const _KNOCKBACK_DECAY := 1000.0
 
 # Variable animación
-@onready var animated_sprite = $AnimatedSprite2D
+@export var animated_sprite : AnimatedSprite2D
 
 func _ready() -> void:
 	platform_wall_layers = 0
@@ -50,7 +50,7 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	# LÓGICA DE MOVIMIENTO: ¿Persiguiendo o Patrullando?
-	if chase_target != null and not PlayerManager.is_dead and not GameManager.is_dialogue_active:
+	if chase_target != null and not GameManager.is_dead and not GameManager.is_dialogue_active:
 		# Calcular dirección hacia el jugador (Persecución en 360°)
 		direction = (chase_target.global_position - global_position).normalized()
 	else:
@@ -79,7 +79,7 @@ func _physics_process(delta: float) -> void:
 func _process(_delta: float) -> void:
 	if player_ref != null and can_attack \
 		and not GameManager.is_dialogue_active \
-		and not PlayerManager.is_dead:
+		and not GameManager.is_dead:
 		_attack_player()
 
 # --- DETECCIÓN PARA PERSECUCIÓN ---

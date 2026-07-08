@@ -1,10 +1,21 @@
 extends Node
 
+signal health_changed(current_health, max_health)
+
+#Variables del jugador
+var health := 5
+var max_health := 5
+var attack_damage := 1
+
+var is_dead := false
+
 #Variiable para detectar si se está en dialogo
 var is_dialogue_active := false
 
 #Registra interacción del jugador con el mundo
 var has_met_enemy01 = false
+
+var the_game_controls := false
 
 #Eventos según las decisiones del jugador
 @warning_ignore("unused_signal")

@@ -38,7 +38,7 @@ const _KNOCKBACK_FORCE := 450.0
 const _KNOCKBACK_DECAY := 1000.0
 
 #Variable animación
-@onready var animated_sprite = $AnimatedSprite2D
+@export var animated_sprite : AnimatedSprite2D
 
 func _ready() -> void:
 	animated_sprite.self_modulate = Color.GREEN
@@ -86,7 +86,7 @@ func _process(_delta: float) -> void:
 	# Iniciar diálogo con interact
 	if is_player_close and Input.is_action_just_pressed("interact") \
 			and not GameManager.is_dialogue_active \
-			and not PlayerManager.is_dead:
+			and not GameManager.is_dead:
 		DialogueManager.show_dialogue_balloon(TEST_GREETING, "start")
 		animated_sprite.stop()
 		GameManager.is_dialogue_active = true

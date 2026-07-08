@@ -16,7 +16,7 @@ func _area_exited(area):
 func _process(_delta: float) -> void:
 	if is_player_close and Input.is_action_just_pressed("interact") \
 		and GameManager.is_dialogue_active == false \
-		and PlayerManager.is_dead == false:
+		and GameManager.is_dead == false:
 		DialogueManager.show_dialogue_balloon(_INTERACT_TUTORIAL, "start")
 
 #Iniciar diálogo

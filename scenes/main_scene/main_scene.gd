@@ -1,7 +1,13 @@
 extends Node2D
 
-@onready var room_container = $RoomContainer
-@onready var player = $Player
+@export var room_container : Node2D
+@export var player : CharacterBody2D
+@export var hud : CanvasLayer
+
+func _ready() -> void:
+	if player and hud:
+		GameManager.health_changed.connect(hud.update_health)
+		hud.update_health(GameManager.health, GameManager.max_health)
 
 func change_room(room_path: String) -> void:
 	# 1. Limpiar la habitación anterior de forma segura

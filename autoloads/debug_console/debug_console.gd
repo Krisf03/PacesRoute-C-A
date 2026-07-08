@@ -248,11 +248,12 @@ func execute(raw: String) -> void:
 # ── Jugador ──────────────────────────────────────────────────────
 
 func _cmd_heal() -> void:
-	PlayerManager.health = PlayerManager.max_health
-	if PlayerManager.is_dead:
+	GameManager.health = GameManager.max_health
+	GameManager.health_changed.emit(GameManager.health, GameManager.max_health)
+	if GameManager.is_dead:
 		_cmd_revive()
 		return
-	_log_success("Jugador curado → %d/%d HP" % [PlayerManager.health, PlayerManager.max_health])
+	_log_success("Jugador curado → %d/%d HP" % [GameManager.health, GameManager.max_health])
 	_refresh_status_tab()
 
 func _cmd_kill() -> void:
@@ -270,7 +271,7 @@ func _cmd_revive() -> void:
 		_log_error("Jugador no encontrado en escena.")
 		return
 	_player_ref.revive()
-	_log_success("Jugador revivido → %d/%d HP" % [PlayerManager.health, PlayerManager.max_health])
+	_log_success("Jugador revivido → %d/%d HP" % [GameManager.health, GameManager.max_health])
 	_refresh_status_tab()
 
 func _cmd_god() -> void:
@@ -281,28 +282,28 @@ func _cmd_god() -> void:
 
 func _cmd_set_health(args: Array) -> void:
 	var amount := int(args[0])
-	amount = clamp(amount, 0, PlayerManager.max_health)
-	PlayerManager.health = amount
-	if amount <= 0 and not PlayerManager.is_dead:
+	amount = clamp(amount, 0, GameManager.max_health)
+	GameManager.health = amount
+	if amount <= 0 and not GameManager.is_dead:
 		_cmd_kill()
-	elif amount > 0 and PlayerManager.is_dead:
+	elif amount > 0 and GameManager.is_dead:
 		_cmd_revive()
 	else:
-		_log_success("Vida → %d/%d" % [PlayerManager.health, PlayerManager.max_health])
+		_log_success("Vida → %d/%d" % [GameManager.health, GameManager.max_health])
 	_refresh_status_tab()
 
 func _cmd_set_max_hp(args: Array) -> void:
 	var amount := int(args[0])
 	amount = max(1, amount)
-	PlayerManager.max_health = amount
-	PlayerManager.health = min(PlayerManager.health, amount)
+	GameManager.max_health = amount
+	GameManager.health = min(GameManager.health, amount)
 	_log_success("Vida máxima → %d" % amount)
 	_refresh_status_tab()
 
 func _cmd_set_damage(args: Array) -> void:
 	var amount := int(args[0])
-	PlayerManager.attack_damage = max(0, amount)
-	_log_success("Daño de ataque → %d" % PlayerManager.attack_damage)
+	GameManager.attack_damage = max(0, amount)
+	_log_success("Daño de ataque → %d" % GameManager.attack_damage)
 	_refresh_status_tab()
 
 func _cmd_set_speed(args: Array) -> void:
@@ -502,10 +503,10 @@ func _refresh_status_tab() -> void:
 	
 	var text := ""
 	text += "[b][color=#aaddff]══ JUGADOR ══[/color][/b]\n"
-	text += "  Vida:          [color=#ff7777]%d[/color] / [color=#dddddd]%d[/color]\n" % [PlayerManager.health, PlayerManager.max_health]
-	text += "  Daño:          [color=#ffaa44]%d[/color]\n" % PlayerManager.attack_damage
+	text += "  Vida:          [color=#ff7777]%d[/color] / [color=#dddddd]%d[/color]\n" % [GameManager.health, GameManager.max_health]
+	text += "  Daño:          [color=#ffaa44]%d[/color]\n" % GameManager.attack_damage
 	text += "  Velocidad:     [color=#aaffaa]%.0f[/color]\n" % player_speed
-	text += "  Muerto:        [color=#ff5555]%s[/color]\n" % PlayerManager.is_dead
+	text += "  Muerto:        [color=#ff5555]%s[/color]\n" % GameManager.is_dead
 	text += "  God Mode:      [color=%s]%s[/color]\n" % ["#55ee88" if _god_mode else "#888888", _god_mode]
 	text += "\n"
 	text += "[b][color=#aaddff]══ JUEGO ══[/color][/b]\n"

@@ -47,6 +47,8 @@ const _KNOCKBACK_DECAY := 2000.0
 @export var _attack_cooldown = 1.0
 
 func _ready() -> void:
+	GameManager.health_changed.emit(GameManager.health, GameManager.max_health)
+	
 	#Señales para eventos de diálogo
 	GameManager.player_steps_aside.connect(_on_dialogue_step_aside)
 	
@@ -66,8 +68,8 @@ func _physics_process(delta: float) -> void:
 	var joystick_direction := Vector2.ZERO
 	var keyboard_direction := Vector2.ZERO
 	if not GameManager.is_dialogue_active \
-		and not PlayerManager.is_dead \
-		and not PlayerManager.the_game_controls:
+		and not GameManager.is_dead \
+		and not GameManager.the_game_controls:
 		keyboard_direction = Input.get_vector(
 			"ui_left",
 			"ui_right",
@@ -78,12 +80,12 @@ func _physics_process(delta: float) -> void:
 	#calcula la dirección del joystick y lo mete en su variable 
 	if joystick != null and is_instance_valid(joystick) \
 		and not GameManager.is_dialogue_active \
-		and not PlayerManager.is_dead \
-		and not PlayerManager.the_game_controls:
+		and not GameManager.is_dead \
+		and not GameManager.the_game_controls:
 		joystick_direction = joystick.direction
 
 	#suma las variables, para que no decidir una u otra, y se normaliza para evitar velocidades exageradas
-	if PlayerManager.the_game_controls == false:
+	if GameManager.the_game_controls == false:
 		direction = joystick_direction + keyboard_direction
 		direction = direction.normalized()
 
@@ -98,15 +100,15 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed + _knockback_velocity
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("attack") and not PlayerManager.is_dead \
+	if Input.is_action_just_pressed("attack") and not GameManager.is_dead \
 			and not GameManager.is_dialogue_active \
-			and not PlayerManager.the_game_controls \
+			and not GameManager.the_game_controls \
 			and _can_attack:
 		_attack()
 	
 	_calculate_flip_h()
 	
-	if PlayerManager.is_dead == false:
+	if GameManager.is_dead == false:
 		if _is_attacking == false:
 			_animation_run()
 
@@ -120,15 +122,15 @@ func receive_joystick(j: Area2D) -> void:
 
 func _on_attack_area_body_entered(body):
 	if _is_attacking == true:
-		body._take_damage(PlayerManager.attack_damage, global_position)
+		body._take_damage(GameManager.attack_damage, global_position)
 
 func _on_dialogue_step_aside():
-	PlayerManager.the_game_controls = true
+	GameManager.the_game_controls = true
 	direction = Vector2(0, 1)
 	speed /= 3.9
 	await get_tree().create_timer(1).timeout
 	speed *= 3.9
-	PlayerManager.the_game_controls = false
+	GameManager.the_game_controls = false
 
 #funcion que define en que dirección sucederá el ataque
 func _update_attack_position():
@@ -163,18 +165,19 @@ func _take_damage(amount : int, source_position: Vector2):
 	if OS.is_debug_build() and DebugConsole.is_god_mode():
 		return
 	
-	PlayerManager.health -= amount
+	GameManager.health = max(0, GameManager.health - amount)
+	GameManager.health_changed.emit(GameManager.health, GameManager.max_health)
 	
 	#Calculamos la dirección opuesta al atacante y aplicamos la fuerza
 	var knockback_direction = (global_position - source_position).normalized()
 	_knockback_velocity = knockback_direction * _KNOCKBACK_FORCE
 	
-	if PlayerManager.health <= 0:
+	if GameManager.health <= 0:
 		_die()
 
 #Función para manejar la muerte del jugador
 func _die():
-	PlayerManager.is_dead = true
+	GameManager.is_dead = true
 	if OS.is_debug_build():
 		DebugConsole.log_warning("Jugador murió")
 	_dead_animation()
@@ -206,7 +209,7 @@ func _attack_animation():
 
 #Función que gestiona las animaciones de muerte
 func  _dead_animation():
-	if PlayerManager.is_dead == true:
+	if GameManager.is_dead == true:
 		_animated_sprite.play("die")
 		await get_tree().create_timer(0.5).timeout
 		_animated_sprite.play("died")
@@ -217,5 +220,6 @@ func _calculate_flip_h():
 		_animated_sprite.flip_h = direction.x < 0
 
 func revive():
-	PlayerManager.is_dead = false
-	PlayerManager.health = PlayerManager.max_health
+	GameManager.is_dead = false
+	GameManager.health = GameManager.max_health
+	GameManager.health_changed.emit(GameManager.health, GameManager.max_health)

@@ -41,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	var current_speed = normal_speed
 	
 	# Comprobar si el jugador est¨¢ cerca y activo
-	if player_ref != null and not PlayerManager.is_dead and not GameManager.is_dialogue_active:
+	if player_ref != null and not GameManager.is_dead and not GameManager.is_dialogue_active:
 		# Calcular direcci¨®n opuesta al jugador (Huir)
 		var flee_direction = (global_position - player_ref.global_position).normalized()
 		
