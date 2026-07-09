@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dodevgrfs6j2a" path="res://scenes/player/player.tscn" id="5_kbdpr"]
 [ext_resource type="PackedScene" uid="uid://gs5dabnee434" path="res://scenes/ui/hud/hud.tscn" id="6_kbdpr"]
 
-[node name="MainScene" type="Node2D" unique_id=1641207472 node_paths=PackedStringArray("room_container", "player", "hud")]
+[node name="MainScene" type="Node2D" unique_id=1641207472 node_paths=PackedStringArray("room_container", "player", "hud") groups=["main_scene"]]
 script = ExtResource("1_nvhbv")
 room_container = NodePath("RoomContainer")
 player = NodePath("Player")

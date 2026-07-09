@@ -194,6 +194,11 @@ func _register_all_commands() -> void:
 		["<name>"],
 		func(a): _cmd_scene(a))
 	
+	register_command("translate",
+		"Cambia el idioma del juego. Ej: translate en",
+		["<languaje>"],
+		func(a): _cmd_translate(a))
+	
 	# ── Consola ───────────────────────────────────────────
 	register_command("help",
 		"Muestra todos los comandos disponibles",
@@ -381,16 +386,21 @@ func _cmd_reload() -> void:
 func _cmd_scene(args: Array) -> void:
 	# Mapa de alias → ruta real
 	var scene_map := {
-		"test_room" : "res://scenes/test_room/test_room.tscn",
-		"main"      : "res://scenes/main_scene/main_scene.tscn",
+		"test" : "res://scenes/rooms/test_room/test_room.tscn",
+		"zones" : "res://scenes/rooms/test_game_zones/test_game_zones.tscn",
+		"start" : "res://scenes/rooms/airlock_start_point/airlock_start_point.tscn"
 	}
 	var key = args[0].to_lower()
 	if scene_map.has(key):
 		_log_info("Cambiando a escena '%s'..." % key)
 		await get_tree().process_frame
-		get_tree().change_scene_to_file(scene_map[key])
+		Transitioner.transition_to_scene(scene_map[key])
 	else:
 		_log_warning("Escena desconocida. Opciones: %s" % ", ".join(scene_map.keys()))
+
+func _cmd_translate(args: Array) -> void:
+	var language = args[0]
+	TranslationServer.set_locale(str(language))
 
 # ── Consola ───────────────────────────────────────────────────────
 

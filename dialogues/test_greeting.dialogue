@@ -1,31 +1,31 @@
 ~ start
 
 if not GameManager.has_met_enemy01
-	Enemigo01: [[¡Déjame caminar!|¡No te atravieses!|¡Fuera del camino!]] 
-	Whole: [speed=0.1] [wave]Perdona...[/wave]
+	Enemigo01: [[¡Déjame caminar!|¡No te atravieses!|¡Fuera del camino!]] [ID:E1F83B_C8332D] 
+	Whole: [speed=0.1] [wave]Perdona...[/wave] [ID:E1F83B_3CD60F]
 	~ indignation
-	Enemigo01: [speed=0.4]Ya no hay respeto por los tranceuntes estos días...
-	- ¿Qué has dicho? => indignation
-	- Eso... ¡Eso no es verdad!
-	%5 Enemigo01: [speed=0.3]Solo apártate por favor
-	%2 Enemigo01: [speed=0.3]Cierra ya el ocico y apárta
-	%2 Enemigo01: [speed=0.3]Deja el drama y quítate
-	%1 Enemigo01: [speed=0.3]Felicidades, esta línea solo tenía el 10% de chances de aparecer
-	- Apartarte
-		Enemigo01: Gracias...
+	Enemigo01: [speed=0.4]Ya no hay respeto por los tranceuntes estos días... [ID:E1F83B_E485A9]
+	- ¿Qué has dicho? [ID:E1F83B_9E455F] => indignation
+	- Eso... ¡Eso no es verdad! [ID:E1F83B_C613A7]
+	%5 Enemigo01: [speed=0.3]Solo apártate por favor [ID:E1F83B_B6CACF]
+	%2 Enemigo01: [speed=0.3]Cierra ya el ocico y apárta [ID:E1F83B_BD2E12]
+	%2 Enemigo01: [speed=0.3]Deja el drama y quítate [ID:E1F83B_8B980A]
+	%1 Enemigo01: [speed=0.3]Felicidades, esta línea solo tenía el 10% de chances de aparecer [ID:E1F83B_AF3097]
+	- Apartarte [ID:E1F83B_4D4846]
+		Enemigo01: Gracias... [ID:E1F83B_FD9E37]
 		do GameManager.player_steps_aside.emit()
-	- No hacerlo
-		Enemigo01: Pues lo que te llevas >:v
+	- No hacerlo [ID:E1F83B_67587C]
+		Enemigo01: Pues lo que te llevas >:v [ID:E1F83B_521F4C]
 		do GameManager.enemy_attacks.emit()
 	set GameManager.has_met_enemy01 = true
 else
-	Enemigo01: ¿Otra vez tú?
-	Enemigo01: [speed=0.3]No me hagas repetirlo, aparta si no quieres un cabezaso
-	- Apartarte
-		Enemigo01: Gracias...
+	Enemigo01: ¿Otra vez tú? [ID:E1F83B_6B140D]
+	Enemigo01: [speed=0.3]No me hagas repetirlo, aparta si no quieres un cabezaso [ID:E1F83B_6ADAB4]
+	- Apartarte [ID:E1F83B_A56F9C]
+		Enemigo01: Gracias... [ID:E1F83B_C7150F]
 		do GameManager.player_steps_aside.emit()
-	- No hacerlo
-		Enemigo01: Pues lo que te llevas >:v
+	- No hacerlo [ID:E1F83B_FA6C35]
+		Enemigo01: Pues lo que te llevas >:v [ID:E1F83B_75BDBF]
 		do GameManager.enemy_attacks.emit()
 
 => END
