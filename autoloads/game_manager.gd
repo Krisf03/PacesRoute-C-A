@@ -1,5 +1,6 @@
 extends Node
 
+@warning_ignore("unused_signal")
 signal health_changed(current_health, max_health)
 
 #Variables del jugador

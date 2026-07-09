@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tyino1roh5tk"
-path="res://.godot/imported/life_placeholder.png-7f5f5261ef681ae1a48fc1fb6850c52b.ctex"
+uid="uid://cwwnln5jqlkbu"
+path="res://.godot/imported/concole_placeholder.png-5e286595daa41d15f631b2e1cdb2dccc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/placeholders/life_placeholder.png"
-dest_files=["res://.godot/imported/life_placeholder.png-7f5f5261ef681ae1a48fc1fb6850c52b.ctex"]
+source_file="res://sprites/placeholders/concole_placeholder.png"
+dest_files=["res://.godot/imported/concole_placeholder.png-5e286595daa41d15f631b2e1cdb2dccc.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwwnln5jqlkbu"
-path="res://.godot/imported/concole_placeholder.png-8c002e3ec846a5f60de593ec58d8ebee.ctex"
+uid="uid://yqmfjlla1bhj"
+path="res://.godot/imported/hability_placeholder.png-eed2e4cb05a996f8d0ceb7de46f65a30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/placeholders/concole_placeholder.png"
-dest_files=["res://.godot/imported/concole_placeholder.png-8c002e3ec846a5f60de593ec58d8ebee.ctex"]
+source_file="res://sprites/placeholders/hability_placeholder.png"
+dest_files=["res://.godot/imported/hability_placeholder.png-eed2e4cb05a996f8d0ceb7de46f65a30.ctex"]
 
 [params]
 

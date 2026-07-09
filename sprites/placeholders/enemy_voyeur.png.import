@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqpvdckyg7xk"
-path="res://.godot/imported/attack_placeholder.png-1f37ab5199f35a68de97fa1573dd5f01.ctex"
+uid="uid://dm1ii45t3tat8"
+path="res://.godot/imported/enemy_voyeur.png-43797f62a611db06eb77db0725ee0ef9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/placeholders/attack_placeholder.png"
-dest_files=["res://.godot/imported/attack_placeholder.png-1f37ab5199f35a68de97fa1573dd5f01.ctex"]
+source_file="res://sprites/placeholders/enemy_voyeur.png"
+dest_files=["res://.godot/imported/enemy_voyeur.png-43797f62a611db06eb77db0725ee0ef9.ctex"]
 
 [params]
 

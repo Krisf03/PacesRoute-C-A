@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ebrqd4q36lte"]
 
 [ext_resource type="Script" uid="uid://cw7jxkvyxblra" path="res://scenes/imaginations/enemy_follower/enemy_follower.gd" id="1_vljij"]
-[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_msaqx"]
+[ext_resource type="SpriteFrames" uid="uid://64gvlc8mycuv" path="res://sprites/enemy_sprite_frames/robot_sprite_frames.tres" id="2_vljij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
 size = Vector2(26, 23)
@@ -24,13 +24,10 @@ _attack_area = NodePath("AttackArea2D")
 _detection_area = NodePath("PlayerDetectionArea")
 animated_sprite = NodePath("AnimatedSprite2D")
 
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=2112710132]
-rect = Rect2(-19, -17, 35, 41)
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=279949239]
 self_modulate = Color(18.892157, 0, 0, 1)
-sprite_frames = ExtResource("2_msaqx")
-animation = &"header"
+sprite_frames = ExtResource("2_vljij")
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
 position = Vector2(-1, 11.5)

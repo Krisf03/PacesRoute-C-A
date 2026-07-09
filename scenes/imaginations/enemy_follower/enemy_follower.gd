@@ -50,11 +50,13 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	# LÓGICA DE MOVIMIENTO: ¿Persiguiendo o Patrullando?
-	if chase_target != null and not GameManager.is_dead and not GameManager.is_dialogue_active:
+	if chase_target and not GameManager.is_dead and not GameManager.is_dialogue_active:
 		# Calcular dirección hacia el jugador (Persecución en 360°)
 		direction = (chase_target.global_position - global_position).normalized()
 	else:
 		# Movimiento de patrullaje original de lado a lado
+		velocity.y = 0
+		velocity.x = direction.x * speed
 		if position.x < left_limit:
 			direction = Vector2(1, 0)
 		elif position.x > right_limit: # Cambiado a 'elif' para evitar conflictos de frames
@@ -77,6 +79,11 @@ func _physics_process(delta: float) -> void:
 	_update_attack_position()
 
 func _process(_delta: float) -> void:
+	if not chase_target:
+		for body in _detection_area.get_overlapping_bodies():
+			if body.is_in_group("player"):
+				chase_target = body
+				break
 	if player_ref != null and can_attack \
 		and not GameManager.is_dialogue_active \
 		and not GameManager.is_dead:
@@ -90,6 +97,7 @@ func _on_player_detection_area_entered(area):
 
 func _on_player_detection_area_exited(area):
 	if area.owner == chase_target:
+		velocity.y = 0
 		chase_target = null
 
 # --- DETECCIÓN PARA ATAQUE (Se mantiene igual) ---

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coubm8t7em6w5"
-path="res://.godot/imported/interfaz gameplay normal.png-73076bfef39f55c57472165a85700d04.ctex"
+uid="uid://ctkgp7kpf4x35"
+path="res://.godot/imported/heart_placeholder.png-0fb30f8e44d73a6975ef926ac882656c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/placeholders/interfaz gameplay normal.png"
-dest_files=["res://.godot/imported/interfaz gameplay normal.png-73076bfef39f55c57472165a85700d04.ctex"]
+source_file="res://sprites/placeholders/heart_placeholder.png"
+dest_files=["res://.godot/imported/heart_placeholder.png-0fb30f8e44d73a6975ef926ac882656c.ctex"]
 
 [params]
 

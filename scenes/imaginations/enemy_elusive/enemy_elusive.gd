@@ -14,8 +14,8 @@ var direction : Vector2
 @export var flee_speed = 6.0 * PPM * SPRITE_SCALE # 03Mucho m¨¢s r¨¢pido al huir!
 
 # L¨ªmite de movimiento en pixeles
-@export var left_limit := 40
-@export var right_limit := 450
+@export var left_limit := 600
+@export var right_limit := 1150
 
 # Referencia al jugador y ¨¢rea de detecci¨®n
 @export var detection_area : Area2D
@@ -37,6 +37,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
+	if not player_ref:
+		for body in detection_area.get_overlapping_bodies():
+			if body.is_in_group("player"):
+				player_ref = body
+				break
 		
 	var current_speed = normal_speed
 	
@@ -68,7 +73,7 @@ func _physics_process(delta: float) -> void:
 # --- DETECCI07N DEL JUGADOR ---
 # Conecta las se09ales de tu Area2D (ahora enfocada en detecci¨®n mas amplia) aqu¨ª:
 func _on_detection_area_entered(area):
-	if area.owner != null and area.owner.has_method("_take_damage"):
+	if area.owner != null and area.owner.is_in_group("player"):
 		player_ref = area.owner
 
 func _on_detection_area_exited(area):

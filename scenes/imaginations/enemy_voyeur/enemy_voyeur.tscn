@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c3e704al3avcd"]
+
+[ext_resource type="Script" uid="uid://8o4kadgob7mw" path="res://scenes/imaginations/enemy_voyeur/enemy_voyeur.gd" id="1_kqu4o"]
+[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_5y068"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
+size = Vector2(26, 23)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kqu4o"]
+radius = 100.0
+
+[node name="EnemyVoyeur" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("detection_area") groups=["Enemies"]]
+collision_layer = 16
+collision_mask = 29
+script = ExtResource("1_kqu4o")
+detection_area = NodePath("PlayerDetectionArea")
+health = 5
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=279949239]
+sprite_frames = ExtResource("2_5y068")
+animation = &"run_horizontal"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
+position = Vector2(-1, 11.5)
+shape = SubResource("RectangleShape2D_4a83h")
+
+[node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=276656363]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=635302483]
+shape = SubResource("CircleShape2D_kqu4o")
+
+[connection signal="area_entered" from="PlayerDetectionArea" to="." method="_on_detection_area_entered"]
+[connection signal="area_exited" from="PlayerDetectionArea" to="." method="_on_detection_area_exited"]

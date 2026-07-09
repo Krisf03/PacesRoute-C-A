@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxt2asskx6naj"
-path="res://.godot/imported/interact_placeholder.png-b999908ea50a02c6191a5d4cc97fb97c.ctex"
+uid="uid://tyino1roh5tk"
+path="res://.godot/imported/life_placeholder.png-b699db1c1e7cd02e258fb9dd522cbc78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/placeholders/interact_placeholder.png"
-dest_files=["res://.godot/imported/interact_placeholder.png-b999908ea50a02c6191a5d4cc97fb97c.ctex"]
+source_file="res://sprites/placeholders/life_placeholder.png"
+dest_files=["res://.godot/imported/life_placeholder.png-b699db1c1e7cd02e258fb9dd522cbc78.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yqmfjlla1bhj"
-path="res://.godot/imported/hability_placeholder.png-3697ddc5905165b2dce1765df4fc0dd4.ctex"
+uid="uid://bqpvdckyg7xk"
+path="res://.godot/imported/attack_placeholder.png-4bcc17d51e591ae99ad505d9f9dbde33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ui/placeholders/hability_placeholder.png"
-dest_files=["res://.godot/imported/hability_placeholder.png-3697ddc5905165b2dce1765df4fc0dd4.ctex"]
+source_file="res://sprites/placeholders/attack_placeholder.png"
+dest_files=["res://.godot/imported/attack_placeholder.png-4bcc17d51e591ae99ad505d9f9dbde33.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpcdv0jq4axnk"]
 
 [ext_resource type="Script" uid="uid://cm5tt5epbgb88" path="res://scenes/imaginations/enemy_dialogue/enemy_dialogue.gd" id="1_ectcb"]
-[ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_0nlnv"]
+[ext_resource type="SpriteFrames" uid="uid://64gvlc8mycuv" path="res://sprites/enemy_sprite_frames/robot_sprite_frames.tres" id="2_pbknx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
 size = Vector2(26, 23)
@@ -23,8 +23,8 @@ _attack_area = NodePath("AttackArea2D")
 animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=233155333]
-sprite_frames = ExtResource("2_0nlnv")
-animation = &"header"
+sprite_frames = ExtResource("2_pbknx")
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=747350134]
 position = Vector2(-1, 11.5)
@@ -42,9 +42,6 @@ collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1905189124]
 shape = SubResource("RectangleShape2D_40wdo")
-
-[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." unique_id=1480359214]
-rect = Rect2(-19, -17, 35, 41)
 
 [connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
 [connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]
