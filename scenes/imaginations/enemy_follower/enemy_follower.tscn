@@ -13,7 +13,7 @@ size = Vector2(33.5, 40.1875)
 size = Vector2(22, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2g543"]
-radius = 150.0
+radius = 100.0
 
 [node name="EnemyFollower" type="CharacterBody2D" unique_id=1129625752 node_paths=PackedStringArray("_attack_area", "_detection_area", "animated_sprite") groups=["Enemies"]]
 position = Vector2(240, 136)

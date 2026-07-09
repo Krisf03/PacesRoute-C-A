@@ -75,6 +75,8 @@ func _physics_process(delta: float) -> void:
 		direction = direction_to_player
 	else:
 		# Patrulla normal de lado a lado si el jugador no está cerca
+		direction.y = 0
+		direction.x = 1 if direction.x > 0 else -1
 		if position.x < left_limit:
 			direction = Vector2(1, 0)
 		if position.x > right_limit:

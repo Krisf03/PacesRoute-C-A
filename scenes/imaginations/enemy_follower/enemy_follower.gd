@@ -55,8 +55,8 @@ func _physics_process(delta: float) -> void:
 		direction = (chase_target.global_position - global_position).normalized()
 	else:
 		# Movimiento de patrullaje original de lado a lado
-		velocity.y = 0
-		velocity.x = direction.x * speed
+		direction.y = 0
+		direction.x = 1 if direction.x > 0 else -1
 		if position.x < left_limit:
 			direction = Vector2(1, 0)
 		elif position.x > right_limit: # Cambiado a 'elif' para evitar conflictos de frames
@@ -97,7 +97,6 @@ func _on_player_detection_area_entered(area):
 
 func _on_player_detection_area_exited(area):
 	if area.owner == chase_target:
-		velocity.y = 0
 		chase_target = null
 
 # --- DETECCIÓN PARA ATAQUE (Se mantiene igual) ---

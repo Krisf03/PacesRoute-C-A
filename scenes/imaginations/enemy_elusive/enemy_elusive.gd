@@ -56,6 +56,8 @@ func _physics_process(delta: float) -> void:
 		# Si llega a los l¨ªmites mientras huye, se queda "atrapado" o intenta no avanzar m¨¢s
 	else:
 		# L¨®gica de patrulla original si no hay jugador cerca
+		direction.y = 0
+		direction.x = 1 if direction.x > 0 else -1
 		if position.x < left_limit:
 			direction = Vector2(1, 0)
 		elif position.x > right_limit:

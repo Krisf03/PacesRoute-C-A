@@ -53,7 +53,7 @@ position = Vector2(-119, 115)
 [node name="EnemyElusive" parent="." unique_id=1855398736 groups=["Enemies"] instance=ExtResource("7_loh55")]
 position = Vector2(898, 99)
 
-[node name="EnemyVoyeur" parent="." unique_id=1433217354 groups=["Enemies"] instance=ExtResource("8_2scqk")]
+[node name="EnemyVoyeur" parent="." unique_id=1433217354 instance=ExtResource("8_2scqk")]
 position = Vector2(691, 285)
 
 [connection signal="area_entered" from="ExitArea2D" to="." method="_on_area_2d_area_entered"]
