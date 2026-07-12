@@ -379,16 +379,21 @@ func _cmd_end_dialogue() -> void:
 	_refresh_status_tab()
 
 func _cmd_reload() -> void:
+	var main = get_tree().get_nodes_in_group("main_scene")[0]
 	_log_info("Recargando escena...")
 	await get_tree().process_frame
-	get_tree().reload_current_scene()
+	if main.current_room_path:
+		Transitioner.transition_to_scene(main.current_room_path)
+	else:
+		get_tree().reload_current_scene()
 
 func _cmd_scene(args: Array) -> void:
 	# Mapa de alias → ruta real
 	var scene_map := {
 		"test" : "res://scenes/rooms/test_room/test_room.tscn",
 		"zones" : "res://scenes/rooms/test_game_zones/test_game_zones.tscn",
-		"start" : "res://scenes/rooms/airlock_start_point/airlock_start_point.tscn"
+		"start" : "res://scenes/rooms/airlock_start_point/airlock_start_point.tscn",
+		"hall" : "res://scenes/rooms/start_hallway/start_hallway.tscn"
 	}
 	var key = args[0].to_lower()
 	if scene_map.has(key):
@@ -400,6 +405,12 @@ func _cmd_scene(args: Array) -> void:
 
 func _cmd_translate(args: Array) -> void:
 	var language = args[0]
+	if language == "es":
+		_log_success("Cambiando idioma del juego a español")
+	elif language == "en":
+		_log_success("Cambiando idioma del juego a inglés")
+	else:
+		_log_warning("El idioma seleccionado no existe. Opciones: es, en")
 	TranslationServer.set_locale(str(language))
 
 # ── Consola ───────────────────────────────────────────────────────

@@ -15,6 +15,8 @@ var is_dialogue_active := false
 
 #Registra interacción del jugador con el mundo
 var has_met_enemy01 = false
+var has_read_second_act = false
+var has_read_third_act = false
 
 var the_game_controls := false
 

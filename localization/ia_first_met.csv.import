@@ -6,10 +6,10 @@ uid="uid://chm7x81ic06l"
 
 [deps]
 
-files=["res://localization/ia_first_met.en.translation"]
+files=["res://localization/ia_first_met.es.translation", "res://localization/ia_first_met.en.translation"]
 
 source_file="res://localization/ia_first_met.csv"
-dest_files=["res://localization/ia_first_met.en.translation"]
+dest_files=["res://localization/ia_first_met.es.translation", "res://localization/ia_first_met.en.translation"]
 
 [params]
 

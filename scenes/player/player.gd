@@ -121,7 +121,7 @@ func receive_joystick(j: Area2D) -> void:
 	joystick = j
 
 func _on_attack_area_body_entered(body):
-	if _is_attacking == true:
+	if _is_attacking == true and body.has_method("_take_damage"):
 		body._take_damage(GameManager.attack_damage, global_position)
 
 func _on_dialogue_step_aside():

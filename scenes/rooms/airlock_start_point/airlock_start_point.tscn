@@ -1,13 +1,25 @@
 [gd_scene format=4 uid="uid://bt70i326st73q"]
 
 [ext_resource type="TileSet" uid="uid://bwr0bbeub8f2s" path="res://tile_sets/placeholder_for_production.tres" id="1_3cr7g"]
+[ext_resource type="Script" uid="uid://cejsyi2cr3w6l" path="res://scenes/rooms/airlock_start_point/airlock_start_point.gd" id="1_utwqd"]
 [ext_resource type="Texture2D" uid="uid://bmeytujl00007" path="res://sprites/tile_sets/Modern tiles_Free/Interiors_free/32x32/Room_Builder_free_32x32.png" id="1_yra1c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h37r8"]
 atlas = ExtResource("1_yra1c")
 region = Rect2(488, 336, 8, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0fn3"]
+size = Vector2(831, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h37r8"]
+size = Vector2(829, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_utwqd"]
+size = Vector2(180, 43)
+
 [node name="AirlockStartPoint" type="Node2D" unique_id=2011524592]
+script = ExtResource("1_utwqd")
+next_scene = "uid://cyxs203x5da2x"
 
 [node name="BackGroundTexture" type="TextureRect" parent="." unique_id=2070270597]
 offset_left = 2.0
@@ -26,4 +38,29 @@ tile_map_data = PackedByteArray("AAAAAP//AAAXAAIAAAABAP//AAABACIAAAACAP//AAABACI
 tile_set = ExtResource("1_3cr7g")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=1059124148]
-position = Vector2(53, 970)
+position = Vector2(88, 959)
+
+[node name="SecondActArea2D" type="Area2D" parent="." unique_id=1988423163]
+position = Vector2(21, 584)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecondActArea2D" unique_id=1270569134]
+position = Vector2(405, 37)
+shape = SubResource("RectangleShape2D_i0fn3")
+
+[node name="ThirdActArea2D" type="Area2D" parent="." unique_id=474881884]
+position = Vector2(20, 157)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ThirdActArea2D" unique_id=189628105]
+position = Vector2(404.5, 0)
+shape = SubResource("RectangleShape2D_h37r8")
+
+[node name="ExitArea2D" type="Area2D" parent="." unique_id=1553415792]
+position = Vector2(-15, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea2D" unique_id=1681592332]
+position = Vector2(431, 48)
+shape = SubResource("RectangleShape2D_utwqd")
+
+[connection signal="area_entered" from="SecondActArea2D" to="." method="_on_second_act_area_2d_area_entered"]
+[connection signal="area_entered" from="ThirdActArea2D" to="." method="_on_third_act_area_2d_area_entered"]
+[connection signal="area_entered" from="ExitArea2D" to="." method="_on_exit_area_2d_area_entered"]

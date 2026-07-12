@@ -1,5 +1,7 @@
 extends Node2D
 
+var current_room_path := ""
+
 @export var room_container : Node2D
 @export var player : CharacterBody2D
 @export var hud : CanvasLayer
@@ -10,6 +12,7 @@ func _ready() -> void:
 		hud.update_health(GameManager.health, GameManager.max_health)
 
 func change_room(room_path: String) -> void:
+	current_room_path = room_path
 	# 1. Limpiar la habitación anterior de forma segura
 	for child in room_container.get_children():
 		child.queue_free()
