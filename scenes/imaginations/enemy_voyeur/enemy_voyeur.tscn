@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://ctplv8twbs4mr" path="res://sprites/enemy_sprite_frames/enemy_sprite_frames.tres" id="2_5y068"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
-size = Vector2(26, 23)
+size = Vector2(26, 3.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kqu4o"]
 radius = 100.0
@@ -19,12 +19,14 @@ health = 5
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=279949239]
 sprite_frames = ExtResource("2_5y068")
 animation = &"run_horizontal"
+offset = Vector2(0, -22.915)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
-position = Vector2(-1, 11.5)
+position = Vector2(0, -8.25)
 shape = SubResource("RectangleShape2D_4a83h")
 
 [node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=276656363]
+position = Vector2(0, -23)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=635302483]

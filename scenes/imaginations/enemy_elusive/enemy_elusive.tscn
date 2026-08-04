@@ -4,13 +4,10 @@
 [ext_resource type="SpriteFrames" uid="uid://64gvlc8mycuv" path="res://sprites/enemy_sprite_frames/robot_sprite_frames.tres" id="2_xyke8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
-size = Vector2(26, 23)
+size = Vector2(26, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
 size = Vector2(33.5, 40.1875)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_40wdo"]
-size = Vector2(22, 26)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xyke8"]
 radius = 100.0
@@ -26,25 +23,22 @@ animated_sprite = NodePath("AnimatedSprite2D")
 self_modulate = Color(0, 0, 1.1014822, 1)
 sprite_frames = ExtResource("2_xyke8")
 animation = &"idle"
+offset = Vector2(0, -22.915)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
-position = Vector2(-1, 11.5)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_4a83h")
 
 [node name="InteractArea2D" type="Area2D" parent="." unique_id=67230660]
+position = Vector2(1, -23)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=149263155]
 position = Vector2(-1.75, 3.09375)
 shape = SubResource("RectangleShape2D_a3pup")
 
-[node name="AttackArea2D" type="Area2D" parent="." unique_id=170552601]
-collision_layer = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1599479735]
-shape = SubResource("RectangleShape2D_40wdo")
-
 [node name="PlayerDetectionArea" type="Area2D" parent="." unique_id=1275078427]
+position = Vector2(0, -20)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionArea" unique_id=721139329]
@@ -52,7 +46,5 @@ shape = SubResource("CircleShape2D_xyke8")
 
 [connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
 [connection signal="area_exited" from="InteractArea2D" to="." method="_area_exited"]
-[connection signal="area_entered" from="AttackArea2D" to="." method="_attack_area_entered"]
-[connection signal="area_exited" from="AttackArea2D" to="." method="_attack_area_exited"]
 [connection signal="area_entered" from="PlayerDetectionArea" to="." method="_on_detection_area_entered"]
 [connection signal="area_exited" from="PlayerDetectionArea" to="." method="_on_detection_area_exited"]

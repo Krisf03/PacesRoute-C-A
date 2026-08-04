@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://wmy3226xwut3" path="res://sprites/character_sprite_frames/character_sprite_frames.tres" id="2_cuyo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b4x07"]
-size = Vector2(8.432403, 5.455788)
+size = Vector2(8.105366, 0.7969897)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cuyo6"]
 size = Vector2(34, 44)
@@ -24,13 +24,15 @@ texture_filter = 1
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_cuyo6")
 animation = &"idle_front"
+offset = Vector2(0, -16.995)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668984670]
-position = Vector2(0, 26.845493)
+position = Vector2(1.0000002, -1)
 scale = Vector2(2.2207513, 2.5094428)
 shape = SubResource("RectangleShape2D_b4x07")
 
 [node name="InteractionArea2D" type="Area2D" parent="." unique_id=748204980]
+position = Vector2(0, -34)
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D" unique_id=928240561]
@@ -38,6 +40,7 @@ position = Vector2(0, 16)
 shape = SubResource("RectangleShape2D_cuyo6")
 
 [node name="AttackArea2D" type="Area2D" parent="." unique_id=557802130]
+position = Vector2(0, -33)
 collision_layer = 2
 collision_mask = 16
 

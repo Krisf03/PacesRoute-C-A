@@ -17,6 +17,9 @@ var is_dialogue_active := false
 var has_met_enemy01 = false
 var has_read_second_act = false
 var has_read_third_act = false
+var is_near_manikin = false
+var is_near_locked_door = false
+var has_read_locked_door = false
 
 var the_game_controls := false
 

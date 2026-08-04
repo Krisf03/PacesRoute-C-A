@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bvwell7g24vlk" path="res://sprites/placeholders/half_locked_door.png" id="4_ejjbs"]
 [ext_resource type="Script" uid="uid://dq8jdc1ixllro" path="res://scenes/rooms/start_hallway/manikin.gd" id="5_ov6ar"]
 [ext_resource type="Texture2D" uid="uid://b8n4x6ebsqpnn" path="res://sprites/placeholders/manikin.png" id="5_utaeh"]
+[ext_resource type="Script" uid="uid://brmtn4wf11ada" path="res://scenes/rooms/start_hallway/locked_door.gd" id="8_cqd8b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_egdx7"]
 atlas = ExtResource("1_as581")
@@ -4522,7 +4523,7 @@ size = Vector2(84, 64)
 size = Vector2(32, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpshx"]
-size = Vector2(32, 32)
+size = Vector2(160, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0fn3"]
 size = Vector2(160, 65)
@@ -9084,10 +9085,10 @@ shape = SubResource("RectangleShape2D_rnr3d")
 position = Vector2(220, 478)
 texture = ExtResource("5_utaeh")
 
-[node name="Area2D" type="Area2D" parent="Manikin" unique_id=6728504]
+[node name="InteractArea2D" type="Area2D" parent="Manikin" unique_id=6728504]
 position = Vector2(218, 480)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Manikin/Area2D" unique_id=1305545432]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Manikin/InteractArea2D" unique_id=1305545432]
 position = Vector2(2, -2)
 shape = SubResource("RectangleShape2D_tpshx")
 
@@ -9103,6 +9104,7 @@ position = Vector2(88, 959)
 position = Vector2(1264, 63)
 collision_layer = 8
 collision_mask = 29
+script = ExtResource("8_cqd8b")
 
 [node name="Sprite2D" type="Sprite2D" parent="LockedDoor" unique_id=2117480609]
 texture = ExtResource("3_ymndc")
@@ -9111,7 +9113,19 @@ texture = ExtResource("3_ymndc")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_i0fn3")
 
+[node name="InteractArea2D" type="Area2D" parent="LockedDoor" unique_id=925118193]
+position = Vector2(-66, 26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LockedDoor/InteractArea2D" unique_id=835925933]
+position = Vector2(66, -2)
+shape = SubResource("RectangleShape2D_tpshx")
+
 [node name="OverlappingLayer" type="TileMapLayer" parent="." unique_id=1666782446]
 z_index = 2
 tile_map_data = PackedByteArray("AAAMABgAAAACACIAAAANABgAAAACACIAAAAOABgAAAACACIAAAAPABgAAAACACIAAAAMABkAAAACACMAAAANABkAAAACACMAAAAOABkAAAACACMAAAAPABkAAAACACMAAAAMABoAAAANAAIAAAANABoAAAANAAIAAAAOABoAAAANAAIAAAA=")
 tile_set = SubResource("TileSet_eu2gh")
+
+[connection signal="area_entered" from="Manikin/InteractArea2D" to="Manikin" method="_on_interact_area_2d_area_entered"]
+[connection signal="area_exited" from="Manikin/InteractArea2D" to="Manikin" method="_on_interact_area_2d_area_exited"]
+[connection signal="area_entered" from="LockedDoor/InteractArea2D" to="LockedDoor" method="_on_interact_area_2d_area_entered"]
+[connection signal="area_exited" from="LockedDoor/InteractArea2D" to="LockedDoor" method="_on_interact_area_2d_area_exited"]

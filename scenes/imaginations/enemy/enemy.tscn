@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://64gvlc8mycuv" path="res://sprites/enemy_sprite_frames/robot_sprite_frames.tres" id="2_i7kir"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4a83h"]
-size = Vector2(26, 23)
+size = Vector2(26, 2.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3pup"]
 size = Vector2(33.5, 40.1875)
@@ -23,22 +23,24 @@ animated_sprite = NodePath("AnimatedSprite2D")
 sprite_frames = ExtResource("2_i7kir")
 animation = &"header"
 frame_progress = 0.38110426
+offset = Vector2(0, -22.915)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=70157989]
-position = Vector2(-1, 11.5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_4a83h")
 
 [node name="InteractArea2D" type="Area2D" parent="." unique_id=67230660]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea2D" unique_id=149263155]
-position = Vector2(-1.75, 3.09375)
+position = Vector2(0, -19)
 shape = SubResource("RectangleShape2D_a3pup")
 
 [node name="AttackArea2D" type="Area2D" parent="." unique_id=170552601]
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea2D" unique_id=1599479735]
+position = Vector2(0, -26)
 shape = SubResource("RectangleShape2D_40wdo")
 
 [connection signal="area_entered" from="InteractArea2D" to="." method="_area_entered"]
