@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://d2gsm54rik71o"]
+
+[ext_resource type="Texture2D" uid="uid://dg7tkvcjsg0qj" path="res://sprites/placeholders/side_pillars.png" id="1_qdu8s"]
+[ext_resource type="Texture2D" uid="uid://bg1bb41lokrxo" path="res://sprites/placeholders/lintel.png" id="2_il5kw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0fn3"]
+size = Vector2(7, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h37r8"]
+size = Vector2(7, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fm7ov"]
+size = Vector2(160, 26)
+
+[node name="Door" type="Area2D" unique_id=2138423735]
+
+[node name="SidePillars" type="Sprite2D" parent="." unique_id=1937251698]
+y_sort_enabled = true
+texture = ExtResource("1_qdu8s")
+offset = Vector2(0, -35.18)
+
+[node name="Lintel" type="Sprite2D" parent="." unique_id=1877414220]
+position = Vector2(0, -36)
+texture = ExtResource("2_il5kw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=309810170]
+
+[node name="RightCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1619566909]
+position = Vector2(83.5, -35)
+shape = SubResource("RectangleShape2D_i0fn3")
+
+[node name="LeftCollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2064001251]
+position = Vector2(-83.5, -35)
+shape = SubResource("RectangleShape2D_h37r8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1832679145]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_fm7ov")
